@@ -1,0 +1,16 @@
+export const GET_EVENTS = 'GET_EVENTS';
+export const CREATE_EVENT = 'GET_EVENTS';
+export const DELETE_EVENT = 'DELETE_EVENT';
+
+export const GET_VENUES = 'GET_VENUES';
+export const ADD_VENUE = 'ADD_VENUE';
+export const DELETE_VENUE = 'DELETE_ITEM';
+export const VENUES_LOADING = 'ITEMS_LOADING';
+export const SEND_VOTE = 'SEND_VOTE';
+
+export const SET_SELECTED_VENUE = 'SET_SELECTED_VENUE';
+export const SET_SELECTED_TIME = "SET_SELECTED_TIME";
+
+export const LOAD_YELP_VENUES = 'LOAD_YELP_VENUES';
+export const GET_YELP_VENUES = 'GET_YELP_VENUES';
+export const REFRESH_YELP_VENUES = 'REFRESH_YELP_VENUES';

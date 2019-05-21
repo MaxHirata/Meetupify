@@ -1,0 +1,3 @@
+module.exports = {
+    YELP_API_KEY: 'j61WKiZTg6nb72TbDbELqGZAJ4-WNSJ_u3TCuGvWYepRn61-HP7grxlwTM1B9zeQ45un9AZs4n6iGwB9tn5rxVdBMLiIIzDfV54--ff6UB45nllFhM06lxmZxlhZXHYx'
+}
