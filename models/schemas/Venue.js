@@ -13,7 +13,11 @@ const VenueSchema = new Schema({
         type: String,
         required: true
     },
-    description: {
+    price: {
+        type: String,
+        required: true
+    },
+    rating: {
         type: String,
         required: true
     }
