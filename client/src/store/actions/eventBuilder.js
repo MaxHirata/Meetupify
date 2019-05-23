@@ -1,9 +1,9 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-export const getVenues = () => dispatch => {
+export const getVenues = (event_id) => dispatch => {
 
-    axios.get('api/events/5ce535112bb8d21850259313/venues')
+    axios.get(`api/events/${event_id}/venues`)
         .then(res => dispatch({
             type: actionTypes.GET_VENUES,
             payload: res.data

@@ -30,7 +30,7 @@ class EventPicker extends Component {
     }
 
     componentDidMount() {
-        this.props.onGetVenues();
+        this.props.onGetVenues('5ce5354d2bb8d21850259314');
     };
 
     venueSelected = (venue) => {
@@ -85,7 +85,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetVenues: () => dispatch(actions.getVenues()),
+        onGetVenues: (event_id) => dispatch(actions.getVenues(event_id)),
         onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo))
     }
 };

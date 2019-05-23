@@ -1,4 +1,4 @@
-export const GET_ALL_EVENT = 'GET_ALL_EVENTS';
+export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_EVENT = 'GET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';
