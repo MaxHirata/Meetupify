@@ -1,27 +1,29 @@
 import React from 'react';
 import {
-    Button,
     Card,
-    CardImg,
-    CardTitle,
     CardText,
+    CardBody,
+    CardLink,
+    CardTitle,
     CardSubtitle,
-    CardBody
+    Button
 } from 'reactstrap';
 
 const eventItem = (props) => {
+    let status = 'ACTIVE';
+    if (props.status === false) {
+        status = 'PAST'
+    }
 
     return (
         <Card>
-            <CardImg top width="200px" height="250px" src={props.image} />
             <CardBody>
                 <CardTitle>
-                    <h5>{props.eventName}</h5>
+                    <h2>{props.eventName}</h2>
                 </CardTitle>
-                <CardSubtitle><h6>{props.status}</h6></CardSubtitle>
-                <CardText>Rating: {props.rating}</CardText>
-                <CardText>Price: {props.price}</CardText>
-                <Button color="danger" onClick={() => props.selectVenue(props)}>Select</Button>
+                <CardSubtitle><h4>{status}</h4></CardSubtitle>
+                <CardText>Deadline: {props.deadlineTime}</CardText>
+                <Button color="danger" onClick={() => props.selectEvent(props.event_id)}>Select</Button>
             </CardBody>
         </Card>
     );

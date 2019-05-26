@@ -42,7 +42,8 @@ router.post("/", (req, res, next) => {
     const newEvent = new Event({
         _id: new mongoose.Types.ObjectId,
         eventName: req.body.eventName,
-        deadlineTime: req.body.deadlineTime
+        deadlineTime: req.body.deadlineTime,
+        finalEvent: null
     });
 
     newEvent.save().then(event => res.json(event));
@@ -76,7 +77,10 @@ router.post("/:id/venue", (req, res, next) => {
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
         location: req.body.location,
-        description: req.body.description
+        link: req.body.link,
+        image: req.body.image,
+        price: req.body.price,
+        rating: req.body.price
     };
 
     Event.findById(req.params.id)
@@ -90,10 +94,13 @@ router.post("/:id/venue", (req, res, next) => {
 //POST New Vote to Event
 router.post('/:id/vote', (req, res, next) => {
     const selectedVenue = {
-        _id: req.body.venueId,
-        name: req.body.venueName,
-        location: req.body.venueLocation,
-        description: req.body.venueDescription
+        _id: req.body.id,
+        name: req.body.name,
+        location: req.body.location,
+        link: req.body.link,
+        image: req.body.image,
+        price: req.body.price,
+        rating: req.body.rating
     }
 
     const newVote = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import VenueItem from './../components/VenueItem';
 import { connect } from 'react-redux';
-import * as actions from './../store/actions/index';
+import * as actions from '../store/actions/index';
 import { updateObject } from '../shared/utilities';
 
 import {
@@ -139,9 +139,9 @@ class AddNewVenues extends Component {
                 submit button add to event venue list
 
                 <CardGroup>
-                    <Row>
+                    <Row key={uuid}>
                         {venues.map((venue) => (
-                            <Col sm="4" style={colStyle}>
+                            <Col sm="4" style={colStyle} key={uuid}>
                                 <VenueItem
                                     name={venue.name}
                                     image={venue.image}
@@ -150,7 +150,7 @@ class AddNewVenues extends Component {
                                     rating={venue.rating}
                                     price={venue.price}
                                     selectVenue={this.props.onSelectVenue}
-                                    id={uuid}
+                                    key={uuid}
                                     clicked={this.selectVenue}
                                 />
                             </Col>

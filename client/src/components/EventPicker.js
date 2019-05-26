@@ -30,7 +30,10 @@ class EventPicker extends Component {
     }
 
     componentDidMount() {
-        this.props.onGetVenues();
+        let current_event = this.props.currentEventId;
+        if (current_event) {
+            this.props.onGetVenues(this.props.currentEventId);
+        }
     };
 
     venueSelected = (venue) => {
@@ -64,7 +67,7 @@ class EventPicker extends Component {
                                     rating={venue.rating}
                                     price={venue.price}
                                     selectVenue={this.props.onSelectVenue}
-                                    id={uuid}
+                                    key={uuid}
                                     clicked={this.selectVenue}
                                 />
                             </Col>
@@ -80,12 +83,13 @@ class EventPicker extends Component {
 
 
 const mapStateToProps = state => ({
-    eventVenues: state.event.venues
+    eventVenues: state.event.venues,
+    currentEventId: state.eventList.selectedEvent
 });
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetVenues: () => dispatch(actions.getVenues()),
+        onGetVenues: (event_id) => dispatch(actions.getVenues(event_id)),
         onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo))
     }
 };

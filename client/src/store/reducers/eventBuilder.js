@@ -107,6 +107,30 @@ const updateObject = (oldObject, updatedProperties) => {
     };
 };
 
+const getVenues = (state, action) => {
+    const venueData = action.payload;
+    console.log(venueData);
+
+    let venueList = [];
+
+    venueData.map(venue => {
+        let loadedVenue = {
+            name: venue.name,
+            location: venue.location,
+            link: venue.link,
+            image: venue.image,
+            price: venue.price,
+            rating: venue.rating
+        };
+
+        venueList.push(loadedVenue);
+    });
+
+    return updateObject(state, {
+        venues: venueList
+    });
+};
+
 const setSelectedVenue = (state, action) => {
     return updateObject(state, {
         selectedVenue: {
@@ -146,36 +170,11 @@ const setVote = (state, action) => {
     });
 };
 
-const getYelpVenues = (state, action) => {
-
-    const yelpData = action.payload;
-    const yelpDataVenues = [];
-
-    yelpData.map(venue => {
-        let venueData = {
-            name: venue.name,
-            image: venue.image_url,
-            link: venue.url,
-            location: venue.location.display_address.join(' '),
-            rating: venue.rating,
-            price: venue.price
-        }
-
-        yelpDataVenues.push(venueData);
-    });
-
-    return updateObject(state, {
-        //Add Venues Loaded From Yelp API
-        yelpVenues: yelpDataVenues
-    });
-};
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case actionTypes.GET_VENUES:
-            return {
-                ...state
-            }
+            return getVenues(state, action);
         case actionTypes.SET_SELECTED_VENUE:
             return setSelectedVenue(state, action);
 

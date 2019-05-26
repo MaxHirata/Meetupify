@@ -9,3 +9,10 @@ export {
     getYelpVenues,
     refreshYelpVenues
 } from './getYelpVenues';
+
+export {
+    getAllEvents,
+    selectEvent,
+    postEvent,
+    deleteEvent
+} from './selectEvents';
