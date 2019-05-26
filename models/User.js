@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 const EventSchema = require('./Event');
 
 const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,

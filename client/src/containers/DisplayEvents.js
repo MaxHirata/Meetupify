@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import {
     Container,
-    Button
+    CardGroup,
+    Row,
+    Col
 } from 'reactstrap';
+import EventItem from '../components/EventItem';
 import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
+
+
+/* Inline Styles */
+const colStyle = {
+    margin: '0',
+    padding: '0'
+};
 
 class DisplayEvents extends Component {
     componentWillMount() {
-        this.props.getAllEvents("working?????????");
+        this.props.getAllEvents();
     }
 
 
@@ -19,6 +30,7 @@ class DisplayEvents extends Component {
 
         return (
             <Container>
+
                 {/* display backlogged events (both active and past events)
                 if( user clicks on active event )
                     -> routes to active Event Page
@@ -27,6 +39,26 @@ class DisplayEvents extends Component {
                     diplay ("Time to create an EVENT!!!!")
 
                 Create Event Button */}
+
+
+                <CardGroup>
+                    <Row>
+                        {events.map((event) => (
+                            <Col sm="4" style={colStyle}>
+                                <EventItem
+                                    key={uuid}
+                                    event_id={event._id}
+                                    eventName={event.eventName}
+                                    status={event.status}
+                                    deadlineTime={event.deadlineTime}
+                                    selectEvent={this.props.setSelectedEvent} />
+                            </Col>
+
+                        ))}
+                    </Row>
+
+                </CardGroup>
+
             </Container>
         );
     }
@@ -38,7 +70,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllEvents: (message) => dispatch(actions.getAllEvents(message))
+        getAllEvents: () => dispatch(actions.getAllEvents()),
+        setSelectedEvent: (event_id) => dispatch(actions.selectEvent(event_id))
     }
 };
 

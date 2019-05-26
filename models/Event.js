@@ -24,9 +24,19 @@ const VoteSchema = new Schema({
 
 //Event Schema
 const EventSchema = new Schema({
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     _id: mongoose.Schema.Types.ObjectId,
-    eventName: { type: String, required: true },
-    deadlineTime: { type: Date, default: Date.now },
+    eventName: {
+        type: String,
+        required: true
+    },
+    deadlineTime: {
+        type: Date,
+        default: Date.now
+    },
     active: { type: Boolean, default: true },
     finalEvent: VenueSchema,
     venueList: [VenueSchema],
