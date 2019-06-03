@@ -36,53 +36,7 @@ class AddNewVenues extends Component {
         searchData: {
             location: "",
             term: ""
-        },
-        venues: [
-            {
-                name: "Coffee Brew House",
-                image: "",
-                link: "",
-                location: "Kaimuki, HI 96816",
-                rating: 4,
-                price: "$$"
-            },
-            {
-                name: "Mama's Bar",
-                image: "",
-                link: "",
-                location: "Honolulu, HI 88888",
-                rating: 5,
-                price: "$"
-            },
-            {
-                name: "Teapresso",
-                image: "",
-                link: "",
-                location: "Piikoi, HI 96816",
-                rating: 3,
-                price: "$$"
-            },
-            {
-                name: "Teapresso2",
-                image: "",
-                link: "",
-                location: "Piikoi, HI 96816",
-                rating: 4,
-                price: "$"
-            }
-        ]
-    }
-
-    // componentDidMount() {
-    //     this.props.getYelpVenues()
-    // }
-
-    componentDidUpdate() {
-
-    }
-
-    onChangeSearchParams() {
-
+        }
     }
 
     onHandlerChangeLocation(event) {
@@ -106,8 +60,6 @@ class AddNewVenues extends Component {
     render() {
 
         const venues = this.props.yelpVenues;
-
-
 
         return (
             <Container>

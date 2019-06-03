@@ -26,9 +26,9 @@ const VoteSchema = new Schema({
 const EventSchema = new Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
         ref: 'User'
     },
-    _id: mongoose.Schema.Types.ObjectId,
     eventName: {
         type: String,
         required: true

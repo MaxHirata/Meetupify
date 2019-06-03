@@ -5,7 +5,7 @@ import Layout from './hoc/Layout';
 import EventCreator from './containers/EventCreator';
 import DisplayEvents from './containers/DisplayEvents';
 import AddYelpVenues from './containers/AddNewVenues';
-import LoginSignUp from './containers/LoginSignUp';
+import LoginSignUp from './containers/Auth';
 import { Provider } from 'react-redux';
 import store from './store/store';
 

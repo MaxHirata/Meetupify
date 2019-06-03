@@ -1,16 +1,61 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const auth = require('../../middleware/auth');
+const { check, validationResult } = require('express-validator/check');
 
 //Event Model
-//const User = require('../../models/User');
+const User = require('../../models/User');
 const Event = require('../../models/Event');
 
-//GET Events
-router.get("/", (req, res, next) => {
-    Event.find()
-        .then(events => res.json(events));
+
+//GET User's Events
+router.get('/me', auth, async (req, res) => {
+    try {
+        const event = await Event.find({ owner: req.user.id }).populate('owner', ['username']);
+
+        if (!event) {
+            res.status(400).json({ msg: 'There is no event for this user ' });
+        }
+
+        res.json(event);
+    } catch (err) {
+        console.error(errl.message);
+        res.status(500).send('Server Error3');
+    }
 });
+
+//GET EVENT(S) BY OWNER ID
+router.get('/:owner_id', async (req, res) => {
+    try {
+        const events = await Event.find({ owner: req.params.owner_id }).populate('owner', ['eventName', 'deadlineTime']);
+
+        if (!events) return res.status(400).json({ msg: 'This User Has No EVENTS....' });
+        res.json(events);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error4');
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({ msg: 'Events NOT FOUND' });
+        }
+    }
+});
+
+//GET ALL EVENTS
+router.get('/', async (req, res) => {
+    try {
+        const events = await Event.find().populate('owner', ['eventName', 'deadlineTime']);
+        res.json(events);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error4');
+    }
+});
+// //GET Events old
+// router.get("/", (req, res, next) => {
+//     Event.find()
+//         .then(events => res.json(events));
+// });
 
 //GET Event By Id
 router.get('/:id', (req, res, next) => {
@@ -38,17 +83,58 @@ router.get('/:id/votes', (req, res, next) => {
 
 
 //POST New Event
-router.post("/", (req, res, next) => {
-    const newEvent = new Event({
-        _id: new mongoose.Types.ObjectId,
-        eventName: req.body.eventName,
-        deadlineTime: req.body.deadlineTime,
-        finalEvent: null
+router.post("/", [auth, [
+    check('eventName', 'Event Name is required').not().isEmpty(),
+    check('deadlineTime', 'Deadline Time is Required').not().isEmpty()
+]],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+
+        //Build new Event Object
+        const eventFields = {
+            owner: req.user.id,
+            eventName: req.body.eventName,
+            deadlineTime: req.body.deadlineTime,
+            finalEvent: null
+        };
+
+
+        try {
+
+            // let event = await Event.findOne({ owner: req.user.id });
+
+            // if (event) {
+            //     //update
+            //     console.log('inside update try');
+            //     event = await Event.findOneAndUpdate(
+            //         { owner: req.user.id },
+            //         { $set: eventFields },
+            //         { new: true }
+            //     );
+            //     console.log(event);
+            //     return res.json(event);
+            // };
+
+            //Create
+            let event = new Event(eventFields);
+
+            await event.save();
+            res.json(event);
+
+
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error3");
+        }
+
+        //console.log(newEvent);
+        //res.send('Inside POST New Events');
+        //newEvent.save().then(event => res.json(event));
+
     });
-
-    newEvent.save().then(event => res.json(event));
-
-});
 
 //POST Change Event Name
 router.post('/:id/deadlineDate', (req, res, next) => {
@@ -128,6 +214,18 @@ router.post('/:id/finalEvent', (req, res, next) => {
             //calc event time
             //post final venue and time
         });
+});
+
+//Delete User and All User's Events
+router.delete('/:owner_id', async (req, res) => {
+    try {
+        await Event.findByIdAndDelete({ owner: req.user.id });
+        await User.findOne({ _id: req.user.id })
+        res.json({ msg: 'Deleted User and User Events' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ msg: 'Server Error on Delete User route' })
+    }
 });
 
 //DELETE Event
