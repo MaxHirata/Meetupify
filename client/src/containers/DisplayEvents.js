@@ -9,6 +9,7 @@ import EventItem from '../components/EventItem';
 import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import { Redirect } from 'react-router-dom';
 
 
 /* Inline Styles */
@@ -27,6 +28,10 @@ class DisplayEvents extends Component {
 
         const events = this.props.events;
         console.log(events);
+
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         return (
             <Container>
@@ -65,7 +70,8 @@ class DisplayEvents extends Component {
 }
 
 const mapStateToProps = state => ({
-    events: state.eventList.eventList
+    events: state.eventList.eventList,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => {

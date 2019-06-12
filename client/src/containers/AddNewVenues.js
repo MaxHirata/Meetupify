@@ -4,6 +4,7 @@ import VenueItem from './../components/VenueItem';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
 import { updateObject } from '../shared/utilities';
+import { Redirect } from 'react-router-dom';
 
 import {
     Container,
@@ -60,6 +61,10 @@ class AddNewVenues extends Component {
     render() {
 
         const venues = this.props.yelpVenues;
+
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         return (
             <Container>
@@ -118,7 +123,8 @@ class AddNewVenues extends Component {
 
 const mapStateToProps = state => ({
     yelpVenues: state.yelpVenues.venues,
-    eventVenues: state.event.venues
+    eventVenues: state.event.venues,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => {

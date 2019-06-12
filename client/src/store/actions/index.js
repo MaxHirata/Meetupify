@@ -3,6 +3,13 @@ export {
 } from './alerts';
 
 export {
+    loadUser,
+    loginUser,
+    logout,
+    register
+} from './auth';
+
+export {
     getVenues,
     addVenue,
     setSelectedVenue

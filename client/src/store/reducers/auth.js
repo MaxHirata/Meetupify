@@ -3,11 +3,11 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     isAuthenticated: null,
     username: null,
-    isAdmin: true,
+    email: null,
     id: null,
+    isAdmin: true,
     token: localStorage.getItem('token'),
-    loading: true,
-    user: null
+    loading: true
 };
 
 export default function (state = initialState, action) {
@@ -36,8 +36,10 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
-                user: action.payload
+                username: action.payload.username,
+                id: action.payload.id,
+                email: action.payload.email,
+                loading: false
             }
         default:
             return state;
