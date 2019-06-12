@@ -10,7 +10,12 @@ import {
     Button
 
 } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { setAlert } from '../../store/actions/alerts';
+import { register } from '../../store/actions/auth';
 
 class RegisterUser extends Component {
     state = {
@@ -31,31 +36,42 @@ class RegisterUser extends Component {
         const onSubmit = async () => {
 
             if (this.state.password1 !== this.state.password2) {
+                this.props.setAlert('Passwords Do Not Match...', 'danger');
                 console.log("Error: Passwords DO NOT Match");
             } else {
+
+
+                //this.props.register(this.state.username, this.state.email, this.state.password1);
 
                 const newUser = {
                     username: this.state.username,
                     email: this.state.email,
                     password: this.state.password1
                 }
-                console.log(newUser);
+                this.props.register(newUser);
+                this.props.setAlert('New User is Now Regiserted', 'success');
 
-                try {
-                    const config = {
-                        headers: {
-                            'Content-type': 'application/json'
-                        }
-                    };
+                // console.log(newUser);
 
-                    const body = JSON.stringify(newUser);
+                // try {
+                //     const config = {
+                //         headers: {
+                //             'Content-type': 'application/json'
+                //         }
+                //     };
 
-                    const res = await axios.post('/api/user', body, config);
-                    console.log(res.data);
-                } catch (err) {
-                    console.error(err.response.data);
-                }
+                //     const body = JSON.stringify(newUser);
+
+                //     const res = await axios.post('/api/user', body, config);
+                //     console.log(res.data);
+                // } catch (err) {
+                //     console.error(err.response.data);
+                // }
             }
+        }
+
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/DisplayEvents" />
         }
 
         return (
@@ -95,4 +111,14 @@ class RegisterUser extends Component {
     }
 }
 
-export default RegisterUser;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+};
+
+export default connect(mapStateToProps, { setAlert, register })(RegisterUser);

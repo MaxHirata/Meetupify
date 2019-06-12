@@ -1,4 +1,8 @@
 export {
+    setAlert
+} from './alerts';
+
+export {
     getVenues,
     addVenue,
     setSelectedVenue

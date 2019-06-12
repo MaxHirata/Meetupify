@@ -11,6 +11,9 @@ import {
     Button
 
 } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../store/actions/auth';
 
 class LoginUser extends Component {
     state = {
@@ -30,16 +33,16 @@ class LoginUser extends Component {
 
         const onSubmit = () => {
 
-            const loginUser = {
+            const loginUserData = {
                 email: this.state.email,
                 password: this.state.password
             }
 
-            if (this.state.password1 !== this.state.password2) {
-                console.log("Error: Passwords DO NOT Match");
-            } else {
-                console.log(loginUser);
-            }
+            this.props.loginUser(loginUserData);
+        }
+
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/DisplayEvents" />
         }
 
         return (
@@ -66,4 +69,8 @@ class LoginUser extends Component {
     }
 }
 
-export default LoginUser;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { loginUser })(LoginUser);
