@@ -10,7 +10,7 @@ import RegisterUser from '../components/Auth/RegisterUser';
 
 class Auth extends Component {
     state = {
-        isLogin: false //switch between Login or Register Forms
+        isLogin: true //switch between Login or Register Forms
     }
 
     switchAuthModeHandler = () => {

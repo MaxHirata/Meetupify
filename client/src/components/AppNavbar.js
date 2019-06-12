@@ -64,16 +64,14 @@ class AppNavbar extends Component {
         const usernameBrand = (<div style={{ color: 'white' }}>@{this.props.username}</div>);
 
         return (
-            <Container color="dark">
-                <Navbar color="dark" dark expand="sm" className="mb-5">
-                    <NavbarBrand href="/">Q-Hangout</NavbarBrand>
-                    {this.props.isAuthenticated ? usernameBrand : null}
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        {!this.props.isAuthenticated ? loginSighUp : authorizedLinks}
-                    </Collapse>
-                </Navbar>
-            </Container>
+            <Navbar color="dark" dark expand="sm" className="mb-5">
+                <NavbarBrand href="/">Q-Hangout</NavbarBrand>
+                {this.props.isAuthenticated ? usernameBrand : null}
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    {!this.props.isAuthenticated ? loginSighUp : authorizedLinks}
+                </Collapse>
+            </Navbar>
         );
     }
 }

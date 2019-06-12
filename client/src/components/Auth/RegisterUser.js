@@ -76,36 +76,48 @@ class RegisterUser extends Component {
 
         return (
             <Container>
-                <h3>Username: {this.state.username}</h3>
-                <h3>Email: {this.state.email}</h3>
-                <Label>Register New User</Label>
-                <Form>
-                    <Row>
-                        <FormGroup>
-                            <Label>Username</Label>
-                            <Input type="text" name="username" value={this.state.username} onChange={e => onChange(e)} placeholder="Enter Username" />
-                        </FormGroup>
-                    </Row>
-                    <Row>
-                        <FormGroup>
-                            <Label>Registration Email</Label>
-                            <Input type="email" name="email" value={this.state.email} onChange={e => onChange(e)} placeholder="Enter Email" />
-                        </FormGroup>
-                    </Row>
-                    <Row>
-                        <FormGroup>
-                            <Label>Enter New Password</Label>
-                            <Input type="password" name="password1" value={this.state.password1} onChange={e => onChange(e)} placeholder="Password" />
-                        </FormGroup>
-                    </Row>
-                    <Row>
-                        <FormGroup>
-                            <Label>Verify Password</Label>
-                            <Input type="password" name="password2" value={this.state.password2} onChange={e => onChange(e)} placeholder="Verify Password" />
-                        </FormGroup>
-                    </Row>
-                    <Button color="danger" onClick={onSubmit}>Sign Up</Button>
-                </Form>
+                <div className="authForm">
+                    <Form>
+                        <Row>
+                            <div className="authFormInput">
+                                <FormGroup>
+                                    <Label>Username</Label>
+                                    <Input type="text" name="username" value={this.state.username} onChange={e => onChange(e)} placeholder="Enter Username" />
+                                </FormGroup>
+                            </div>
+
+                        </Row>
+                        <Row>
+                            <div className="authFormInput">
+                                <FormGroup>
+                                    <Label>Registration Email</Label>
+                                    <Input type="email" name="email" value={this.state.email} onChange={e => onChange(e)} placeholder="Enter Email" />
+                                </FormGroup>
+                            </div>
+
+                        </Row>
+                        <Row>
+                            <div class="authFormInput">
+                                <FormGroup>
+                                    <Label>Enter New Password</Label>
+                                    <Input type="password" name="password1" value={this.state.password1} onChange={e => onChange(e)} placeholder="Password" />
+                                </FormGroup>
+                            </div>
+
+                        </Row>
+                        <Row>
+                            <div className="authFormInput">
+                                <FormGroup>
+                                    <Label>Verify Password</Label>
+                                    <Input type="password" name="password2" value={this.state.password2} onChange={e => onChange(e)} placeholder="Verify Password" />
+                                </FormGroup>
+                            </div>
+
+                        </Row>
+                        <Button color="danger" onClick={onSubmit}>Sign Up</Button>
+                    </Form>
+                </div>
+
             </Container>
         )
     }

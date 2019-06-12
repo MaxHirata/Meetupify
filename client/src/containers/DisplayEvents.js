@@ -3,7 +3,8 @@ import {
     Container,
     CardGroup,
     Row,
-    Col
+    Col,
+    Jumbotron
 } from 'reactstrap';
 import EventItem from '../components/EventItem';
 import * as actions from '../store/actions/index';
@@ -44,25 +45,32 @@ class DisplayEvents extends Component {
                     diplay ("Time to create an EVENT!!!!")
 
                 Create Event Button */}
+                <Jumbotron>
+                    <h2>My Events</h2>
+                    <hr className='my-2' />
+                    <CardGroup>
+                        <Row>
+                            {events.map((event) => (
+                                <Col sm="4" style={colStyle}>
+                                    <EventItem
+                                        key={uuid}
+                                        event_id={event._id}
+                                        eventName={event.eventName}
+                                        status={event.status}
+                                        deadlineTime={event.deadlineTime}
+                                        selectEvent={this.props.setSelectedEvent} />
+                                </Col>
 
+                            ))}
+                        </Row>
 
-                <CardGroup>
-                    <Row>
-                        {events.map((event) => (
-                            <Col sm="4" style={colStyle}>
-                                <EventItem
-                                    key={uuid}
-                                    event_id={event._id}
-                                    eventName={event.eventName}
-                                    status={event.status}
-                                    deadlineTime={event.deadlineTime}
-                                    selectEvent={this.props.setSelectedEvent} />
-                            </Col>
+                    </CardGroup>
+                </Jumbotron>
 
-                        ))}
-                    </Row>
-
-                </CardGroup>
+                <Jumbotron>
+                    <h2>Participating Events</h2>
+                    <hr />
+                </Jumbotron>
 
             </Container>
         );

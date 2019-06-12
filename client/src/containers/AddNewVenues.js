@@ -69,27 +69,37 @@ class AddNewVenues extends Component {
         return (
             <Container>
                 <Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="locations" className="mr-sm-2">Location</Label>
-                        <Input
-                            type="text"
-                            name="location"
-                            id="venueLocation"
-                            value={this.state.searchData.location}
-                            onChange={(event) => this.onHandlerChangeLocation(event)}
-                            placeholder="city, state" />
-                    </FormGroup>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="term" className="mr-sm-2">Terms</Label>
-                        <Input
-                            type="text"
-                            name="term"
-                            id="venueTerms"
-                            value={this.state.searchData.term}
-                            onChange={(event) => this.onHanderChangeTerm(event)}
-                            placeholder="Coffee, Cocktails, Ramen" />
-                    </FormGroup>
-                    <Button color='danger' onClick={() => this.onHandleSubmitSearch()}>Submit</Button>
+                    <Row>
+                        <Col lg={{ size: 'auto', offset: 1 }} md={{ size: 'auto', offset: 1 }} sm="10">
+                            <FormGroup>
+                                <Label for="locations" >Location</Label>
+                                <Input
+                                    type="text"
+                                    name="location"
+                                    id="venueLocation"
+                                    value={this.state.searchData.location}
+                                    onChange={(event) => this.onHandlerChangeLocation(event)}
+                                    placeholder="city, state" />
+                            </FormGroup>
+                        </Col>
+                        <Col lg={{ size: 'auto', offset: 1 }} md={{ size: 'auto', offset: 1 }} sm="10">
+                            <FormGroup>
+                                <Label for="term" >Terms</Label>
+                                <Input
+                                    type="text"
+                                    name="term"
+                                    id="venueTerms"
+                                    value={this.state.searchData.term}
+                                    onChange={(event) => this.onHanderChangeTerm(event)}
+                                    placeholder="Coffee, Cocktails, Ramen" />
+                            </FormGroup>
+                        </Col>
+                        <Col sm={{ size: 'auto', offset: 1 }}>
+                            <Button color='danger' onClick={() => this.onHandleSubmitSearch()}>Submit</Button>
+                        </Col>
+
+                    </Row>
+
                 </Form>
 
                 Display yelp events

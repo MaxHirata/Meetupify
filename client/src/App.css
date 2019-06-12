@@ -30,3 +30,13 @@
     transform: rotate(360deg);
   }
 }
+
+.authForm {
+  padding-top: 20px;
+}
+
+.authFormInput {
+  margin: auto;
+  display: inline-block;
+  text-align: center;
+}

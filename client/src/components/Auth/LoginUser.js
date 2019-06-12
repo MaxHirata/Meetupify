@@ -47,23 +47,29 @@ class LoginUser extends Component {
 
         return (
             <Container>
-                <Label for="loginForm">Login Credentials</Label>
-                <Form>
-                    <Row md={6}>
-                        <FormGroup>
-                            <Label for="loginEmail">Login Email</Label>
-                            <Input type="email" name="email" value={this.state.email} onChange={e => onChange(e)} placeholder="Login with Email" />
-                        </FormGroup>
-                    </Row>
-                    <Row md={6}>
-                        <FormGroup>
-                            <Label for="loginPassword">Password</Label>
-                            <Input type="password" name="password" value={this.state.password} onChange={e => onChange(e)} placeholder="Password" />
-                        </FormGroup>
+                <div className="authForm">
+                    <Form>
+                        <Row md={6}>
+                            <div className="authFormInput">
+                                <FormGroup>
+                                    <Label for="loginEmail">Login Email</Label>
+                                    <Input type="email" name="email" value={this.state.email} onChange={e => onChange(e)} placeholder="Login with Email" />
+                                </FormGroup>
+                            </div>
+                        </Row>
+                        <Row md={6}>
+                            <div className="authFormInput">
+                                <FormGroup>
+                                    <Label for="loginPassword">Password</Label>
+                                    <Input type="password" name="password" value={this.state.password} onChange={e => onChange(e)} placeholder="Password" />
+                                </FormGroup>
+                            </div>
 
-                    </Row>
-                    <Button color="danger" onClick={onSubmit} >Login</Button>
-                </Form>
+                        </Row>
+                        <Button color="danger" onClick={onSubmit} >Login</Button>
+                    </Form>
+                </div>
+
             </Container>
         )
     }
