@@ -13,7 +13,7 @@ import { loadUser } from './store/actions/auth';
 import { setAuthToken } from './shared/utilities';
 
 import { BrowserRouter, Switch, Route, withRouter, Redirect } from 'react-router-dom';
-//import { Container } from 'reactstrap';
+import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import eventBuilder from './store/reducers/eventBuilder';
 
@@ -48,7 +48,14 @@ class App extends Component {
           <div className="App">
             <Layout>
               <AlertBar />
-              {routes}
+              <div className="">
+                {routes}
+              </div>
+
+
+
+
+
             </Layout>
           </div>
         </BrowserRouter>

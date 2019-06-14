@@ -30,9 +30,9 @@ class DisplayEvents extends Component {
         const events = this.props.events;
         console.log(events);
 
-        if (!this.props.isAuthenticated) {
-            return <Redirect to="/" />
-        }
+        // if (!this.props.isAuthenticated) {
+        //     return <Redirect to="/" />
+        // }
 
         return (
             <Container>

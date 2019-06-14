@@ -11,6 +11,8 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
+export const GET_USER_EVENTS = 'GET_USER_EVENTS';
+export const GET_PARTICIPATING_EVENTS = 'GET_PARTICIPATING_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_EVENT = 'GET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';

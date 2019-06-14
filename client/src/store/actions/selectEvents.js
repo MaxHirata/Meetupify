@@ -15,6 +15,42 @@ export const getAllEvents = (message) => dispatch => {
         });
 }
 
+//TODO: Still have to Setup API Route
+// export const getUserEvents = (id) => async dispatch => {
+//     try {
+//         const res = await axios.get(`/api/events/user/${id}`);
+
+//         dispatch({
+//             type: actionTypes.GET_USER_EVENTS,
+//             payload: res.data
+//         });
+//     } catch (err) {
+//         const errors = err.response.data.errors;
+
+//         if (errors) {
+//             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+//         }
+//     }
+// }
+
+//TODO Still have to Build and Setup API Route
+// export const getParticipatingEvents = (username) => async dispatch => {
+//     try {
+//         const res = await axios.get(`/api/events/participating/${username}`);
+
+//         dispatch({
+//             type: actionTypes.GET_PARTICIPATING_EVENTS,
+//             payload: res.data
+//         });
+//     } catch (err) {
+//         const errors = err.response.data.errors;
+
+//         if (errors) {
+//             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+//         }
+//     }
+// }
+
 export const selectEvent = (event_id) => {
     console.log("inside selectEvent" + event_id);
     return {

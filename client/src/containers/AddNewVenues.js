@@ -11,11 +11,14 @@ import {
     Button,
     Form,
     FormGroup,
+    InputGroup,
+    InputGroupAddon,
     Label,
     Input,
     Row,
     Col,
-    CardGroup
+    CardGroup,
+    Jumbotron
 } from 'reactstrap';
 
 /* Inline Styles */
@@ -62,17 +65,18 @@ class AddNewVenues extends Component {
 
         const venues = this.props.yelpVenues;
 
-        if (!this.props.isAuthenticated) {
-            return <Redirect to="/" />
-        }
+        // if (!this.props.isAuthenticated) {
+        //     return <Redirect to="/" />
+        // }
 
         return (
             <Container>
-                <Form inline>
-                    <Row>
-                        <Col lg={{ size: 'auto', offset: 1 }} md={{ size: 'auto', offset: 1 }} sm="10">
+
+                <Form>
+                    <Row form>
+                        <Col xl={5} lg={5} md={5} sm={12}>
                             <FormGroup>
-                                <Label for="locations" >Location</Label>
+                                <Label for="location" >Location</Label>
                                 <Input
                                     type="text"
                                     name="location"
@@ -82,7 +86,7 @@ class AddNewVenues extends Component {
                                     placeholder="city, state" />
                             </FormGroup>
                         </Col>
-                        <Col lg={{ size: 'auto', offset: 1 }} md={{ size: 'auto', offset: 1 }} sm="10">
+                        <Col xl={5} lg={5} md={5} sm={12}>
                             <FormGroup>
                                 <Label for="term" >Terms</Label>
                                 <Input
@@ -94,38 +98,53 @@ class AddNewVenues extends Component {
                                     placeholder="Coffee, Cocktails, Ramen" />
                             </FormGroup>
                         </Col>
-                        <Col sm={{ size: 'auto', offset: 1 }}>
-                            <Button color='danger' onClick={() => this.onHandleSubmitSearch()}>Submit</Button>
-                        </Col>
+                        <Col xl={2} lg={2} md={2} sm={12} >
+                            <Label for="submitButton">Use Yelp</Label>
+                            <InputGroup>
+                                <Button id="submitButton" color='secondary' onClick={() => this.onHandleSubmitSearch()} block>Submit</Button>
 
+
+                            </InputGroup>
+                            {/* <Input type="submit" color="danger" value="Submit" onClick={() => this.onHandleSubmitSearch()} /> */}
+
+
+
+
+                        </Col>
                     </Row>
+
 
                 </Form>
 
+
+
                 Display yelp events
                 submit button add to event venue list
+                <Jumbotron fluid>
+                    <CardGroup>
+                        <Container>
+                            <Row key={uuid}>
+                                {venues.map((venue) => (
+                                    <Col lg={3} md={4} sm={12} style={colStyle} key={uuid}>
+                                        <VenueItem
+                                            name={venue.name}
+                                            image={venue.image}
+                                            link={venue.link}
+                                            location={venue.location}
+                                            rating={venue.rating}
+                                            price={venue.price}
+                                            selectVenue={this.props.onSelectVenue}
+                                            key={uuid}
+                                            clicked={this.selectVenue}
+                                        />
+                                    </Col>
 
-                <CardGroup>
-                    <Row key={uuid}>
-                        {venues.map((venue) => (
-                            <Col sm="4" style={colStyle} key={uuid}>
-                                <VenueItem
-                                    name={venue.name}
-                                    image={venue.image}
-                                    link={venue.link}
-                                    location={venue.location}
-                                    rating={venue.rating}
-                                    price={venue.price}
-                                    selectVenue={this.props.onSelectVenue}
-                                    key={uuid}
-                                    clicked={this.selectVenue}
-                                />
-                            </Col>
+                                ))}
+                            </Row>
+                        </Container>
+                    </CardGroup>
+                </Jumbotron>
 
-                        ))}
-                    </Row>
-
-                </CardGroup>
             </Container>
         );
     }

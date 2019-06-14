@@ -114,7 +114,7 @@ class RegisterUser extends Component {
                             </div>
 
                         </Row>
-                        <Button color="danger" onClick={onSubmit}>Sign Up</Button>
+                        <Button color="secondary" onClick={onSubmit}>Sign Up</Button>
                     </Form>
                 </div>
 

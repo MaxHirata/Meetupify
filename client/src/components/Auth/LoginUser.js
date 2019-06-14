@@ -66,7 +66,7 @@ class LoginUser extends Component {
                             </div>
 
                         </Row>
-                        <Button color="danger" onClick={onSubmit} >Login</Button>
+                        <Button color="secondary" onClick={onSubmit} >Login</Button>{' '}
                     </Form>
                 </div>
 
