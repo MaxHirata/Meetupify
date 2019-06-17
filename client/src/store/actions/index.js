@@ -12,7 +12,8 @@ export {
 export {
     getVenues,
     addVenue,
-    setSelectedVenue
+    setSelectedVenue,
+    loadSelectedEvent
 } from './eventBuilder';
 
 export {

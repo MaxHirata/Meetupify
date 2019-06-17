@@ -51,7 +51,7 @@ class DisplayEvents extends Component {
                     <CardGroup>
                         <Row>
                             {events.map((event) => (
-                                <Col sm="4" style={colStyle}>
+                                <Col lg={3} md={4} sm={12} style={colStyle}>
                                     <EventItem
                                         key={uuid}
                                         event_id={event._id}
@@ -85,7 +85,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return {
         getAllEvents: () => dispatch(actions.getAllEvents()),
-        setSelectedEvent: (event_id) => dispatch(actions.selectEvent(event_id))
+        setSelectedEvent: (event_id) => dispatch(actions.selectEvent(event_id)),
+        loadSelectedEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id))
     }
 };
 

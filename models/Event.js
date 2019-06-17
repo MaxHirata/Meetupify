@@ -37,6 +37,7 @@ const EventSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    participants: [String],
     active: { type: Boolean, default: true },
     finalEvent: VenueSchema,
     venueList: [VenueSchema],

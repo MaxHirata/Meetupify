@@ -25,30 +25,30 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
-//GET EVENT(S) BY OWNER ID
-router.get('/:owner_id', async (req, res) => {
-    try {
-        const events = await Event.find({ owner: req.params.owner_id }).populate('owner', ['eventName', 'deadlineTime']);
+//GET EVENT(S) BY OWNER ID -- OLD
+// router.get('/:owner_id', async (req, res) => {
+//     try {
+//         const events = await Event.find({ owner: req.params.owner_id }).populate('owner', ['eventName', 'deadlineTime']);
 
-        if (!events) return res.status(400).json({ msg: 'This User Has No EVENTS....' });
+//         if (!events) return res.status(400).json({ msg: 'This User Has No EVENTS....' });
+//         res.json(events);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error4');
+//         if (err.kind == 'ObjectId') {
+//             return res.status(400).json({ msg: 'Events NOT FOUND' });
+//         }
+//     }
+// });
+
+//GET USER EVENTS
+router.get('/', auth, async (req, res) => {
+    try {
+        const events = await Event.find({ owner: req.user.id }).populate('owner', ['eventName', 'deadlineTime']);
         res.json(events);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error4');
-        if (err.kind == 'ObjectId') {
-            return res.status(400).json({ msg: 'Events NOT FOUND' });
-        }
-    }
-});
-
-//GET ALL EVENTS
-router.get('/', async (req, res) => {
-    try {
-        const events = await Event.find().populate('owner', ['eventName', 'deadlineTime']);
-        res.json(events);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error4');
+        res.status(500).send('Server ERROR: GET USER EVENTS');
     }
 });
 // //GET Events old
@@ -65,8 +65,9 @@ router.get('/:id', (req, res, next) => {
 });
 
 //GET Event Venues
-router.get('/:id/venues', (req, res, next) => {
-    Event.findById(req.params.id)
+router.get('/:event_id/venues', (req, res, next) => {
+    console.log("Insie get Event Venue Route");
+    Event.findById(req.params.event_id)
         .then(event => res.json(event.venueList))
         .catch(err => res.status(404).json({ status: "venues NOT found" }));
 });
@@ -98,6 +99,7 @@ router.post("/", [auth, [
             owner: req.user.id,
             eventName: req.body.eventName,
             deadlineTime: req.body.deadlineTime,
+            participants: [req.user.username],
             finalEvent: null
         };
 
@@ -133,8 +135,49 @@ router.post("/", [auth, [
         //console.log(newEvent);
         //res.send('Inside POST New Events');
         //newEvent.save().then(event => res.json(event));
+    }
+);
 
-    });
+//Post Friend(s) into FriendList
+router.post('/:event_id/participants', async (req, res) => {
+
+
+    try {
+        const event = await Event.findById(req.params.event_id);
+        if (event) {
+            //APPEND THE LIST OF PARTICIPANTS FROM BODY TO event.participantList
+            //event.participantList
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error add friend")
+    }
+});
+
+//POST New Venue to Event
+router.post("/:event_id/venues", (req, res, next) => {
+
+    const newVenue = {
+        _id: new mongoose.Types.ObjectId,
+        name: req.body.name,
+        location: req.body.location,
+        link: req.body.link,
+        image: req.body.image,
+        price: req.body.price,
+        rating: req.body.price
+    };
+
+    Event.findById(req.params.event_id)
+        .then(event => {
+            event.venueList.push(newVenue);
+            event.save().then(() => res.json(event));
+        })
+        .catch(err => res.status(404).json({ error: 'not working...' }));
+});
+
+
+//OLD ROUTES-------------------------------------------------------------------
 
 //POST Change Event Name
 router.post('/:id/deadlineDate', (req, res, next) => {
@@ -156,26 +199,7 @@ router.post('/:id/deadlineDate', (req, res, next) => {
         .catch(err => res.status(404).json({ error: false }));
 });
 
-//POST New Venue to Event
-router.post("/:id/venue", (req, res, next) => {
 
-    const newVenue = {
-        _id: new mongoose.Types.ObjectId,
-        name: req.body.name,
-        location: req.body.location,
-        link: req.body.link,
-        image: req.body.image,
-        price: req.body.price,
-        rating: req.body.price
-    };
-
-    Event.findById(req.params.id)
-        .then(event => {
-            event.venueList.push(newVenue);
-            event.save().then(() => res.json(event));
-        })
-        .catch(err => res.status(404).json({ error: 'not working...' }));
-});
 
 //POST New Vote to Event
 router.post('/:id/vote', (req, res, next) => {

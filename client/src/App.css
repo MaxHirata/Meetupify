@@ -57,6 +57,11 @@ body{
   text-align: center;
 }
 
+.row {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .searchForm {
   margin: auto;
   text-align: center;

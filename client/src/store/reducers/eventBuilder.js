@@ -3,7 +3,8 @@ import uuid from 'uuid';
 
 const initialState = {
     id: uuid,
-    venues: [
+    eventName: "",
+    venueList: [
         {
             name: "Coffee Brew House",
             image: "",
@@ -47,7 +48,8 @@ const initialState = {
         price: null
     },
     selectedTime: null,
-    votes: []
+    votes: [],
+    participantList: []
 };
 
 
@@ -93,10 +95,12 @@ const newInitialState = {
     id: null,
     eventName: "",
     deadlineTime: null,
+    eventDate: null,
     active: false,
     finalEvent: null,
     venueList: [],
-    vots: []
+    votes: [],
+    selectedVenue: null
 };
 
 // Utility Function
@@ -111,7 +115,7 @@ const getVenues = (state, action) => {
     const venueData = action.payload;
     console.log(venueData);
 
-    let venueList = [];
+    let venues = [];
 
     venueData.map(venue => {
         let loadedVenue = {
@@ -123,11 +127,11 @@ const getVenues = (state, action) => {
             rating: venue.rating
         };
 
-        venueList.push(loadedVenue);
+        venues.push(loadedVenue);
     });
 
     return updateObject(state, {
-        venues: venueList
+        venueList: venues
     });
 };
 
@@ -143,6 +147,17 @@ const setSelectedVenue = (state, action) => {
         }
     });
 };
+
+const loadSelectedEventHandler = (state, action) => {
+    return updateObject(state, {
+        id: action.payload.id,
+        eventName: action.payload.eventName,
+        venueList: action.payload.venueList,
+        active: action.payload.active,
+        deadlineTime: action.payload.deadlineTime,
+        votes: action.payload.votes
+    });
+}
 
 const addVenue = (state, action) => {
     const newVenue = {
@@ -171,12 +186,14 @@ const setVote = (state, action) => {
 };
 
 
-export default function (state = initialState, action) {
+export default function (state = newInitialState, action) {
     switch (action.type) {
         case actionTypes.GET_VENUES:
             return getVenues(state, action);
         case actionTypes.SET_SELECTED_VENUE:
             return setSelectedVenue(state, action);
+        case actionTypes.LOAD_SELECTED_EVENT:
+            return loadSelectedEventHandler(state, action);
 
         default:
             return state;

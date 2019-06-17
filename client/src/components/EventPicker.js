@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 import {
-    Container,
+    Jumbotron,
     Row,
     Col,
     CardGroup
@@ -29,10 +29,12 @@ class EventPicker extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let current_event = this.props.currentEventId;
+        console.log("Current Event ID: " + current_event)
         if (current_event) {
-            this.props.onGetVenues(this.props.currentEventId);
+            //this.props.onGetVenues(current_event);
+            this.props.loadSelectedEvent(current_event)
         }
     };
 
@@ -52,15 +54,13 @@ class EventPicker extends Component {
     }
 
     render() {
-
         const venues = this.props.eventVenues;
         return (
-            <Container>
-
+            <Jumbotron>
                 <CardGroup>
-                    <Row>
+                    <Row className="justify-content-center">
                         {venues.map((venue) => (
-                            <Col sm="4" style={colStyle}>
+                            <Col lg={3} md={4} sm={12} style={colStyle}>
                                 <VenueItem
                                     name={venue.name}
                                     location={venue.location}
@@ -71,26 +71,27 @@ class EventPicker extends Component {
                                     clicked={this.selectVenue}
                                 />
                             </Col>
-
                         ))}
                     </Row>
 
                 </CardGroup>
-            </Container>
+            </Jumbotron>
+
         );
     }
 };
 
 
 const mapStateToProps = state => ({
-    eventVenues: state.event.venues,
+    eventVenues: state.event.venueList,
     currentEventId: state.eventList.selectedEvent
 });
 
 const mapDispatchToProps = dispatch => {
     return {
         onGetVenues: (event_id) => dispatch(actions.getVenues(event_id)),
-        onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo))
+        onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo)),
+        loadSelectedEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id))
     }
 };
 

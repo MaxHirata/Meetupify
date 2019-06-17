@@ -18,7 +18,8 @@ import {
     Row,
     Col,
     CardGroup,
-    Jumbotron
+    Jumbotron,
+    InputGroupText,
 } from 'reactstrap';
 
 /* Inline Styles */
@@ -40,8 +41,11 @@ class AddNewVenues extends Component {
         searchData: {
             location: "",
             term: ""
-        }
+        },
+        selectedVenueName: ""
     }
+
+
 
     onHandlerChangeLocation(event) {
         const updatedSearchData = updateObject(this.state.searchData, {
@@ -61,8 +65,17 @@ class AddNewVenues extends Component {
         this.props.loadYelpVenues(this.state.searchData);
     }
 
+    onHandlerAddVenue() {
+
+    }
+
     render() {
 
+        const onChange = () => {
+            if (this.props.selectVenue) {
+                this.setState({ selectedVenueName: this.props.selectedVenue.name });
+            }
+        }
         const venues = this.props.yelpVenues;
 
         // if (!this.props.isAuthenticated) {
@@ -121,6 +134,14 @@ class AddNewVenues extends Component {
                 Display yelp events
                 submit button add to event venue list
                 <Jumbotron fluid>
+                    <h2>Add Venues to Event: {this.props.eventName}</h2>
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend">VenueName</InputGroupAddon>
+                        <Input name="selectedVenueName" onChange={onChange()} value={this.state.selectedVenueName} placeholder="Select A Venue Below...." />
+                        <InputGroupAddon addonType="append">
+                            <Button color="danger">Add to Event</Button>
+                        </InputGroupAddon>
+                    </InputGroup>
                     <CardGroup>
                         <Container>
                             <Row key={uuid}>
@@ -153,7 +174,9 @@ class AddNewVenues extends Component {
 const mapStateToProps = state => ({
     yelpVenues: state.yelpVenues.venues,
     eventVenues: state.event.venues,
-    isAuthenticated: state.auth.isAuthenticated
+    eventName: state.event.eventName,
+    selectedVenue: state.event.selectVenue,
+    isAuthenticated: state.auth.isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch => {
