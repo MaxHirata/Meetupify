@@ -66,7 +66,8 @@ class AddNewVenues extends Component {
     }
 
     onHandlerAddVenue() {
-
+        //console.log(this.props.selectedVenue);
+        this.props.addVenue(this.props.currentEventId, this.props.selectedVenue);
     }
 
     render() {
@@ -139,7 +140,7 @@ class AddNewVenues extends Component {
                         <InputGroupAddon addonType="prepend">VenueName</InputGroupAddon>
                         <Input name="selectedVenueName" onChange={onChange()} value={this.state.selectedVenueName} placeholder="Select A Venue Below...." />
                         <InputGroupAddon addonType="append">
-                            <Button color="danger">Add to Event</Button>
+                            <Button color="danger" onClick={() => this.onHandlerAddVenue()}>Add to Event</Button>
                         </InputGroupAddon>
                     </InputGroup>
                     <CardGroup>
@@ -175,7 +176,8 @@ const mapStateToProps = state => ({
     yelpVenues: state.yelpVenues.venues,
     eventVenues: state.event.venues,
     eventName: state.event.eventName,
-    selectedVenue: state.event.selectVenue,
+    currentEventId: state.eventList.selectedEvent,
+    selectedVenue: state.event.selectedVenue,
     isAuthenticated: state.auth.isAuthenticated,
 });
 
@@ -183,7 +185,8 @@ const mapDispatchToProps = dispatch => {
     return {
         loadYelpVenues: (searchParams) => dispatch(actions.loadYelpVenues(searchParams)),
         getYelpVenues: () => dispatch(actions.getYelpVenues()),
-        onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo))
+        onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo)),
+        addVenue: (event_id, venue) => dispatch(actions.addVenue(event_id, venue))
     }
 };
 

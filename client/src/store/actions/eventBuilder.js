@@ -52,10 +52,17 @@ export const setSelectedVenue = (venue) => {
 };
 
 
-export const addVenue = (venue) => {
-    return {
-        type: actionTypes.ADD_VENUE,
-        payload: venue
+export const addVenue = (event_id, venue) => async dispatch => {
+    const body = JSON.stringify(venue);
+    console.log(body);
+
+    try {
+        await axios.post(`/api/events/${event_id}/venues`, body);
+        dispatch({
+            type: actionTypes.ADD_VENUE
+        });
+    } catch (err) {
+        console.error(err.message);
     }
 };
 

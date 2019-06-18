@@ -139,8 +139,8 @@ const setSelectedVenue = (state, action) => {
     return updateObject(state, {
         selectedVenue: {
             name: action.payload.name,
-            image: null,
-            link: null,
+            image: action.payload.image,
+            link: action.payload.link,
             location: action.payload.location,
             rating: action.payload.rating,
             price: action.payload.price
@@ -194,7 +194,7 @@ export default function (state = newInitialState, action) {
             return setSelectedVenue(state, action);
         case actionTypes.LOAD_SELECTED_EVENT:
             return loadSelectedEventHandler(state, action);
-
+        case actionTypes.ADD_VENUE:
         default:
             return state;
     }
