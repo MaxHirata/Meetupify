@@ -64,6 +64,8 @@ class EventPicker extends Component {
                                 <VenueItem
                                     name={venue.name}
                                     location={venue.location}
+                                    image={venue.image}
+                                    link={venue.link}
                                     rating={venue.rating}
                                     price={venue.price}
                                     selectVenue={this.props.onSelectVenue}

@@ -53,11 +53,18 @@ export const setSelectedVenue = (venue) => {
 
 
 export const addVenue = (event_id, venue) => async dispatch => {
-    const body = JSON.stringify(venue);
-    console.log(body);
+    //const body = JSON.stringify(venue);
+    //console.log(body);
 
     try {
-        await axios.post(`/api/events/${event_id}/venues`, body);
+        await axios.post(`/api/events/${event_id}/venues`, {
+            name: venue.name,
+            location: venue.location,
+            link: venue.link,
+            image: venue.image,
+            price: venue.price,
+            rating: venue.rating
+        });
         dispatch({
             type: actionTypes.ADD_VENUE
         });

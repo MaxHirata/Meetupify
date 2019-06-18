@@ -168,6 +168,9 @@ router.post("/:event_id/venues", (req, res, next) => {
         rating: req.body.price
     };
 
+    console.log("inside New Venue Route");
+    console.log(req.body);
+
     Event.findById(req.params.event_id)
         .then(event => {
             event.venueList.push(newVenue);
