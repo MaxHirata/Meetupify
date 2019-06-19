@@ -9,6 +9,11 @@ const config = require('config');
 
 const User = require('../../models/User');
 
+/**
+ * @route GET /api/auth/
+ * @desc GET User Info (used for testing)
+ * @access Private
+ */
 router.get('/', auth, async (req, res) => {
     try {
         console.log(req.user.id);
@@ -20,6 +25,11 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+/**
+ * @route POST /api/user/
+ * @desc Login User
+ * @access Public
+ */
 router.post(
     '/',
     [

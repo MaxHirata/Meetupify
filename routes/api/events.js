@@ -9,7 +9,11 @@ const User = require('../../models/User');
 const Event = require('../../models/Event');
 
 
-//GET User's Events
+/**
+ * @route GET /api/events/me
+ * @desc Retrieve (Owner)User's Events
+ * @access Private
+ */
 router.get('/me', auth, async (req, res) => {
     try {
         const event = await Event.find({ owner: req.user.id }).populate('owner', ['username']);
@@ -42,6 +46,11 @@ router.get('/me', auth, async (req, res) => {
 // });
 
 //GET USER EVENTS
+/**
+ * @route GET /api/events/
+ * @desc Retrieve (Owner)User's Events
+ * @access Private
+ */
 router.get('/', auth, async (req, res) => {
     try {
         const events = await Event.find({ owner: req.user.id }).populate('owner', ['eventName', 'deadlineTime']);
@@ -51,20 +60,26 @@ router.get('/', auth, async (req, res) => {
         res.status(500).send('Server ERROR: GET USER EVENTS');
     }
 });
-// //GET Events old
-// router.get("/", (req, res, next) => {
-//     Event.find()
-//         .then(events => res.json(events));
-// });
 
-//GET Event By Id
+
+/**
+ * @route GET /api/events/:id
+ * @desc Get Event Info By Event Id
+ * @access Public
+ */
 router.get('/:id', (req, res, next) => {
     Event.findById(req.params.id)
         .then(event => res.json(event))
         .catch(err => res.status(404).json({ success: false }));
 });
 
+
 //GET Event Venues
+/**
+ * @route GET /api/:event_id/venues
+ * @desc Retrieve Event's Venues
+ * @access Public
+ */
 router.get('/:event_id/venues', (req, res, next) => {
     console.log("Insie get Event Venue Route");
     Event.findById(req.params.event_id)
@@ -72,7 +87,12 @@ router.get('/:event_id/venues', (req, res, next) => {
         .catch(err => res.status(404).json({ status: "venues NOT found" }));
 });
 
-//GET Event Votes (maybe Calculate votes later....)
+
+/**
+ * @route GET /api/:id/votes
+ * @desc GET Event's Votes (Still in the Works, May do Calculation for Votes)
+ * @access Public
+ */
 router.get('/:id/votes', (req, res, next) => {
     Event.findById(req.params.id)
         .then(event => {
@@ -84,6 +104,11 @@ router.get('/:id/votes', (req, res, next) => {
 
 
 //POST New Event
+/**
+ * @route POST /api/events/
+ * @desc Create New Event
+ * @access Private
+ */
 router.post("/", [auth, [
     check('eventName', 'Event Name is required').not().isEmpty(),
     check('deadlineTime', 'Deadline Time is Required').not().isEmpty()
@@ -106,20 +131,6 @@ router.post("/", [auth, [
 
         try {
 
-            // let event = await Event.findOne({ owner: req.user.id });
-
-            // if (event) {
-            //     //update
-            //     console.log('inside update try');
-            //     event = await Event.findOneAndUpdate(
-            //         { owner: req.user.id },
-            //         { $set: eventFields },
-            //         { new: true }
-            //     );
-            //     console.log(event);
-            //     return res.json(event);
-            // };
-
             //Create
             let event = new Event(eventFields);
 
@@ -131,10 +142,6 @@ router.post("/", [auth, [
             console.error(err.message);
             res.status(500).send("Server Error3");
         }
-
-        //console.log(newEvent);
-        //res.send('Inside POST New Events');
-        //newEvent.save().then(event => res.json(event));
     }
 );
 
@@ -182,18 +189,13 @@ router.post("/:event_id/venues", (req, res, next) => {
 
 //OLD ROUTES-------------------------------------------------------------------
 
-//POST Change Event Name
-router.post('/:id/deadlineDate', (req, res, next) => {
-    Event.findById(req.params.id)
-        .then(event => {
-            event.deadlineTime = req.body.eventName;
-            event.save().then(() => res.json({ eventName: 'change successful!!' }));
-        })
-        .catch(err => res.status(404).json({ error: false }));
-});
 
-//POST change Deadline
-router.post('/:id/deadlineDate', (req, res, next) => {
+/**
+ * @route PUT /api/events/:id/deadlineDate
+ * @desc Change Event's Deadline Time (Untested
+ * @access Private
+ */
+router.put('/:id/deadlineDate', (req, res, next) => {
     Event.findById(req.params.id)
         .then(event => {
             event.deadlineTime = req.body.deadlineTime;
@@ -203,11 +205,13 @@ router.post('/:id/deadlineDate', (req, res, next) => {
 });
 
 
-
-//POST New Vote to Event
+/**
+ * @route POST /api/:id/vote
+ * @desc Add Vote to Event
+ * @access Private
+ */
 router.post('/:id/vote', (req, res, next) => {
     const selectedVenue = {
-        _id: req.body.id,
         name: req.body.name,
         location: req.body.location,
         link: req.body.link,
@@ -219,7 +223,6 @@ router.post('/:id/vote', (req, res, next) => {
     const newVote = {
         _id: new mongoose.Types.ObjectId,
         venue: selectedVenue,
-        eventTime: req.body.eventTime,
         voterName: req.body.voterName,
         timeStamp: req.body.timeStamp
     }
@@ -232,18 +235,12 @@ router.post('/:id/vote', (req, res, next) => {
         .catch(err => res.status(404).json({ error: 'not working....' }));
 });
 
-//POST Calculate Votes for Final Events
-router.post('/:id/finalEvent', (req, res, next) => {
-    Event.findById(req.params.id)
-        .then(event => {
-            //check deadline date with current time
-            //count votes
-            //calc event time
-            //post final venue and time
-        });
-});
 
-//Delete User and All User's Events
+/**
+ * @route DELETE /api/events/:owner_id
+ * @desc DELETE User and Events (This WILL HAVE TO BE MOVED TO USER ROUTE INSTEAD
+ * @access Private
+ */
 router.delete('/:owner_id', async (req, res) => {
     try {
         await Event.findByIdAndDelete({ owner: req.user.id });
@@ -255,14 +252,24 @@ router.delete('/:owner_id', async (req, res) => {
     }
 });
 
-//DELETE Event
+
+/**
+ * @route DELETE /api/events/:id
+ * @desc Remove Event
+ * @access Public
+ */
 router.delete('/:id', (req, res, next) => {
     Event.findById(req.params.id)
         .then(event => event.remove().then(() => res.json({ success: true })))
-        .catch(err => res.status(404).json({ success: false }));
+        .catch(err => res.status(404).json({ error: err.message }));
 });
 
-//DELETE Event Venues
+
+/**
+ * @route DELETE /api/:id/:venueId
+ * @desc Remove Venue from Event
+ * @access Private
+ */
 router.delete('/:id/:venueId', (req, res, next) => {
     Event.findById(req.params.id)
         .then(event => {

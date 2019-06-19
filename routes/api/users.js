@@ -10,7 +10,12 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Event = require('../../models/Event');
 
-//Register New User
+
+/**
+ * @route POST /api/user/
+ * @desc Register New User
+ * @access Public
+ */
 router.post('/', [
   check('username', 'Username is required').not().isEmpty(),
   check('email', 'Please Input a Valid Email').isEmail(),
@@ -72,28 +77,23 @@ router.post('/', [
   }
 );
 
+
+/**
+ * @route GET /api/user/
+ * @desc GET All Users (Used Only in Testing, WIll DELETE LATER)
+ * @access Public
+ */
 router.get("/", (req, res, next) => {
   User.find().then(users => res.json(users));
 });
 
-// router.post("/", (req, res, next) => {
-//   const newUser = new User({
-//     _id: mongoose.Schema.Types.ObjectId,
-//     username: req.body.username,
-//     email: req.body.email,
-//     password: req.body.password
-//   });
-
-//   newUser.save().then(user => res.json(user));
-// });
-
-// router.delete("/:id", (req, res, next) => {
-//   User.findById(req.params.id)
-//     .then(user => user.remove().then(() => res.json({ success: true })))
-//     .catch(err => res.status(404).json({ success: false }));
-// });
-
 //Delete User and All User's Events
+
+/**
+ * @route DELETE /api/user/
+ * @desc DELETE Existing User
+ * @access Private
+ */
 router.delete('/', auth, async (req, res) => {
   try {
     console.log(req.user);
@@ -118,6 +118,8 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
+
+module.exports = router;
 //implemented with encryption and security verifications
 /*
 router.post("/signup", (req, res, next) => {
@@ -157,7 +159,7 @@ router.post("/signup", (req, res, next) => {
         }
       });
   });
-  
+
   router.post("/login", (req, res, next) => {
     User.find({ email: req.body.email })
       .exec()
@@ -201,7 +203,7 @@ router.post("/signup", (req, res, next) => {
         });
       });
   });
-  
+
   router.delete("/:userId", (req, res, next) => {
     User.remove({ _id: req.params.userId })
       .exec()
@@ -222,4 +224,3 @@ router.post("/signup", (req, res, next) => {
 
 
 
-module.exports = router;
