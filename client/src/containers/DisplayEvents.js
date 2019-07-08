@@ -22,17 +22,64 @@ const colStyle = {
 class DisplayEvents extends Component {
     componentWillMount() {
         this.props.getAllEvents();
+        this.props.getParticipatingEvents();
     }
 
 
     render() {
 
         const events = this.props.events;
-        console.log(events);
+        const participatingEvents = this.props.participatingEvents;
+
+        console.log("My Events Data")
+        console.log(events)
+
+        console.log("ParticipatingEvents")
+        console.log(participatingEvents)
 
         // if (!this.props.isAuthenticated) {
         //     return <Redirect to="/" />
         // }
+
+        let displayEvents = (
+            <CardGroup>
+                <Row>
+                    {events.map((event) => (
+                        <Col lg={3} md={4} sm={12} style={colStyle}>
+                            <EventItem
+                                key={uuid}
+                                event_id={event._id}
+                                eventName={event.eventName}
+                                status={event.status}
+                                deadlineTime={event.deadlineTime}
+                                selectEvent={this.props.setSelectedEvent} />
+                        </Col>
+
+                    ))}
+                </Row>
+
+            </CardGroup>
+        )
+
+        let displayParticipantingEvents = (
+            <CardGroup>
+                <Row>
+                    {participatingEvents.map((event) => (
+                        <Col lg={3} md={4} sm={12} style={colStyle}>
+                            <EventItem
+                                key={uuid}
+                                event_id={event._id}
+                                eventName={event.eventName}
+                                status={event.status}
+                                deadlineTime={event.deadlineTime}
+                                selectEvent={this.props.setSelectedEvent} />
+                        </Col>
+
+                    ))}
+                </Row>
+
+            </CardGroup>
+        )
 
         return (
             <Container>
@@ -48,7 +95,8 @@ class DisplayEvents extends Component {
                 <Jumbotron>
                     <h2>My Events</h2>
                     <hr className='my-2' />
-                    <CardGroup>
+                    {events !== undefined ? displayEvents : null}
+                    {/* <CardGroup>
                         <Row>
                             {events.map((event) => (
                                 <Col lg={3} md={4} sm={12} style={colStyle}>
@@ -64,12 +112,13 @@ class DisplayEvents extends Component {
                             ))}
                         </Row>
 
-                    </CardGroup>
+                    </CardGroup> */}
                 </Jumbotron>
 
                 <Jumbotron>
                     <h2>Participating Events</h2>
-                    <hr />
+                    <hr className="my-2" />
+                    {participatingEvents !== undefined ? displayParticipantingEvents : null}
                 </Jumbotron>
 
             </Container>
@@ -79,12 +128,15 @@ class DisplayEvents extends Component {
 
 const mapStateToProps = state => ({
     events: state.eventList.eventList,
-    isAuthenticated: state.auth.isAuthenticated
+    participatingEvents: state.eventList.participatingEvents,
+    isAuthenticated: state.auth.isAuthenticated,
+    username: state.auth.username
 });
 
 const mapDispatchToProps = dispatch => {
     return {
         getAllEvents: () => dispatch(actions.getAllEvents()),
+        getParticipatingEvents: () => dispatch(actions.getParticipatingEvents()),
         setSelectedEvent: (event_id) => dispatch(actions.selectEvent(event_id)),
         loadSelectedEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id))
     }

@@ -29,6 +29,52 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
+//GET USER EVENTS
+/**
+ * @route GET /api/events/
+ * @desc Retrieve (Owner)User's Events
+ * @access Private
+ */
+router.get('/', auth, async (req, res) => {
+    console.log("inside basic route")
+    try {
+        const events = await Event.find({ owner: req.user.id }).populate('owner', ['eventName', 'deadlineTime']);
+        res.json(events);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server ERROR: GET USER EVENTS');
+    }
+});
+
+//GET Participants associated Events
+router.get('/participatingEvents', auth, async (req, res) => {
+    //console.log("Inside Get Participating  Events")
+    function isParticipant({ participants }) {
+        return participants.includes(req.user.username)
+    }
+
+    try {
+        console.log("Username:" + req.user.username);
+        const events = await Event.find()
+
+        participatingEvents = []
+        events.forEach(function (event) {
+            //console.log(Array.from(event.participants).includes(req.user.username))
+
+            if (event.participants.includes(req.user.username) && (event.owner != req.user.id)) {
+                console.log(event.participants.includes(req.user.username))
+                participatingEvents.push(event)
+            }
+        });
+
+
+        res.json(participatingEvents)
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error on Finding Participant")
+    }
+});
+
 //GET EVENT(S) BY OWNER ID -- OLD
 // router.get('/:owner_id', async (req, res) => {
 //     try {
@@ -45,21 +91,8 @@ router.get('/me', auth, async (req, res) => {
 //     }
 // });
 
-//GET USER EVENTS
-/**
- * @route GET /api/events/
- * @desc Retrieve (Owner)User's Events
- * @access Private
- */
-router.get('/', auth, async (req, res) => {
-    try {
-        const events = await Event.find({ owner: req.user.id }).populate('owner', ['eventName', 'deadlineTime']);
-        res.json(events);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server ERROR: GET USER EVENTS');
-    }
-});
+
+
 
 
 /**
@@ -103,6 +136,7 @@ router.get('/:id/votes', (req, res, next) => {
 });
 
 
+
 //POST New Event
 /**
  * @route POST /api/events/
@@ -119,6 +153,13 @@ router.post("/", [auth, [
             return res.status(400).json({ errors: errors.array() })
         }
 
+        //Build User's Participant
+        // const participantUser = {
+        //     username: req.user.username,
+        //     numVotes: 3,
+        //     owner: true
+        // }
+
         //Build new Event Object
         const eventFields = {
             owner: req.user.id,
@@ -128,15 +169,12 @@ router.post("/", [auth, [
             finalEvent: null
         };
 
-
         try {
-
             //Create
             let event = new Event(eventFields);
 
             await event.save();
             res.json(event);
-
 
         } catch (err) {
             console.error(err.message);
@@ -145,24 +183,37 @@ router.post("/", [auth, [
     }
 );
 
-//Post Friend(s) into FriendList
-router.post('/:event_id/participants', async (req, res) => {
+//Post Participant into Participant List
+// router.post('/:event_id/participants', async (req, res) => {
+//     try {
+//         const event = await Event.findById(req.params.event_id);
+//         if (event) {
+
+//             const newParticipant = {
+//                 username: req.body.username,
+//                 numVotes: 3,
+//                 owner: false
+//             }
+
+//             event.participants.push(newParticipant)
+//             await event.save();
+//             res.json(event);
+//         }
+
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send("Server Error failed to add friend")
+//     }
+// });
 
 
-    try {
-        const event = await Event.findById(req.params.event_id);
-        if (event) {
-            //APPEND THE LIST OF PARTICIPANTS FROM BODY TO event.participantList
-            //event.participantList
-        }
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error add friend")
-    }
-});
 
 //POST New Venue to Event
+/**
+ * @route POST /api/events/:event_id/venues
+ * @desc Add Venue to Event
+ * @access Public
+ */
 router.post("/:event_id/venues", (req, res, next) => {
 
     const newVenue = {
@@ -172,11 +223,8 @@ router.post("/:event_id/venues", (req, res, next) => {
         link: req.body.link,
         image: req.body.image,
         price: req.body.price,
-        rating: req.body.price
+        rating: req.body.rating
     };
-
-    console.log("inside New Venue Route");
-    console.log(req.body);
 
     Event.findById(req.params.event_id)
         .then(event => {
@@ -210,30 +258,30 @@ router.put('/:id/deadlineDate', (req, res, next) => {
  * @desc Add Vote to Event
  * @access Private
  */
-router.post('/:id/vote', (req, res, next) => {
-    const selectedVenue = {
-        name: req.body.name,
-        location: req.body.location,
-        link: req.body.link,
-        image: req.body.image,
-        price: req.body.price,
-        rating: req.body.rating
-    }
+// router.post('/:id/vote', (req, res, next) => {
+//     const selectedVenue = {
+//         name: req.body.name,
+//         location: req.body.location,
+//         link: req.body.link,
+//         image: req.body.image,
+//         price: req.body.price,
+//         rating: req.body.rating
+//     }
 
-    const newVote = {
-        _id: new mongoose.Types.ObjectId,
-        venue: selectedVenue,
-        voterName: req.body.voterName,
-        timeStamp: req.body.timeStamp
-    }
+//     const newVote = {
+//         _id: new mongoose.Types.ObjectId,
+//         venue: selectedVenue,
+//         voterName: req.body.voterName,
+//         timeStamp: req.body.timeStamp
+//     }
 
-    Event.findById(req.params.id)
-        .then(event => {
-            event.votes.push(newVote);
-            event.save().then(() => res.json(event));
-        })
-        .catch(err => res.status(404).json({ error: 'not working....' }));
-});
+//     Event.findById(req.params.id)
+//         .then(event => {
+//             event.votes.push(newVote);
+//             event.save().then(() => res.json(event));
+//         })
+//         .catch(err => res.status(404).json({ error: 'not working....' }));
+// });
 
 
 /**

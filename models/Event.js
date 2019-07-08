@@ -19,9 +19,9 @@ const VoteSchema = new Schema({
 });
 
 const ParticipantSchema = new Schema({
-    username: String,
-    numVotes: Number,
-    owner: Boolean
+    username: { type: String, required: true },
+    numVotes: { type: Number, default: 3 },
+    owner: { type: Boolean, default: false }
 });
 
 //Event Schema

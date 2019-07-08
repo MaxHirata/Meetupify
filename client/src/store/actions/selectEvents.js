@@ -1,9 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-export const getAllEvents = (message) => dispatch => {
-
-    console.log(message);
+export const getAllEvents = () => dispatch => {
 
     axios.get(`/api/events/`)
         .then(res => dispatch({
@@ -14,6 +12,33 @@ export const getAllEvents = (message) => dispatch => {
             console.log(err);
         });
 }
+
+export const getParticipatingEvents = () => dispatch => {
+    axios.get('/api/events/participatingEvents')
+        .then(res => dispatch({
+            type: actionTypes.GET_PARTICIPATING_EVENTS,
+            payload: res.data
+        }))
+        .catch(err => {
+            console.log(err)
+        });
+}
+
+// export const getParticipatingEvents = () => async dispatch => {
+
+//     const res = await axios.get('/api/events/participatingEvents')
+
+//     console.log("Inside getParticipatingEvnets Action")
+//     console.log(res)
+//     try {
+//         dispatch({
+//             type: actionTypes.GET_PARTICIPATING_EVENTS,
+//             payload: res.data
+//         })
+//     } catch (err) {
+//         console.error(err.message)
+//     }
+// }
 
 //TODO: Still have to Setup API Route
 // export const getUserEvents = (id) => async dispatch => {

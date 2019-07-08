@@ -43,6 +43,7 @@ export const getParticipants = (event_id) => async dispatch => {
 
 }
 
+
 export const setSelectedVenue = (venue) => {
     console.log("payload: " + venue.name);
     return {

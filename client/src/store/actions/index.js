@@ -25,6 +25,7 @@ export {
 export {
     getAllEvents,
     selectEvent,
+    getParticipatingEvents,
     postEvent,
     deleteEvent
 } from './selectEvents';
