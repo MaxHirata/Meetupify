@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/';
 import {
     ListGroup,
     ListGroupItem,
@@ -20,32 +22,65 @@ import uuid from 'uuid';
 class ParticipantList extends Component {
 
     state = {
-        participants: ["Trever", "Sandy", "Ryan", "Max", "Evan"]
+        participants: ["Trever", "Sandy", "Ryan", "Max", "Evan"],
+        newParticipant: ""
     }
 
     render() {
+
+        const onChange = (event) => {
+            this.setState({ newParticipant: event.target.value });
+        }
+
+        const onSubmitNewParticipant = () => {
+            if (this.props.participants.includes(this.state.newParticipant)) {
+                this.props.setAlert("Username is Already Exists in Participants", "danger");
+            } else {
+                this.props.setAlert("New Participant Added!", "success");
+                this.props.addParticipant(this.props.event_id, this.state.newParticipant);
+            }
+        }
+
         return (
+
+
             <ListGroup>
                 <ListGroupItem active>
                     <ListGroupItemHeading>Event Participants</ListGroupItemHeading>
                     <ListGroupItemText>Add Participant's Username to Event for Voting</ListGroupItemText>
                 </ListGroupItem>
+
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">@</InputGroupAddon>
-                    <Input placeholder="username" />
+                    <Input placeholder="username" onChange={e => onChange(e)} />
                     <InputGroupAddon addonType="append">
-                        <Button color="secondary">Add</Button></InputGroupAddon>
+                        <Button color="secondary" onClick={onSubmitNewParticipant}>Add</Button>
+                    </InputGroupAddon>
                 </InputGroup>
                 {
-                    this.state.participants.map(participant => (
+                    this.props.participants.map(participant => (
                         <ParticipantItem
                             username={participant}
                             key={uuid} />
                     ))
                 }
-            </ListGroup>);
+            </ListGroup>
+
+        );
     }
 };
 
-export default ParticipantList;
+const mapStateToProps = state => ({
+    event_id: state.eventList.selectedEvent,
+    participants: state.event.participants
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addParticipant: (event_id, participant_username) => dispatch(actions.addParticipant(event_id, participant_username)),
+        setAlert: (message, alertType) => dispatch(actions.setAlert(message, alertType))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ParticipantList);
 

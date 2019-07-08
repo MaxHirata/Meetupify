@@ -98,6 +98,7 @@ const newInitialState = {
     eventDate: null,
     active: false,
     finalEvent: null,
+    participants: [],
     venueList: [],
     votes: [],
     selectedVenue: null
@@ -152,6 +153,7 @@ const loadSelectedEventHandler = (state, action) => {
     return updateObject(state, {
         id: action.payload.id,
         eventName: action.payload.eventName,
+        participants: action.payload.participants,
         venueList: action.payload.venueList,
         active: action.payload.active,
         deadlineTime: action.payload.deadlineTime,
@@ -193,6 +195,7 @@ export default function (state = newInitialState, action) {
         case actionTypes.SET_SELECTED_VENUE:
             return setSelectedVenue(state, action);
         case actionTypes.LOAD_SELECTED_EVENT:
+        case actionTypes.ADD_PARTICIPANT:
             return loadSelectedEventHandler(state, action);
         case actionTypes.ADD_VENUE:
         default:

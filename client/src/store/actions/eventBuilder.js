@@ -40,7 +40,18 @@ export const getParticipants = (event_id) => async dispatch => {
     } catch (err) {
         console.log(err.message);
     }
+}
 
+export const addParticipant = (event_id, participant_username) => async dispatch => {
+    console.log("inside Add Participant")
+    try {
+        await axios.post(`/api/events/${event_id}/participants/${participant_username}`);
+        dispatch({
+            type: actionTypes.ADD_PARTICIPANT
+        })
+    } catch (err) {
+        console.error(err.message)
+    }
 }
 
 

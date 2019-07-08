@@ -62,7 +62,7 @@ router.get('/participatingEvents', auth, async (req, res) => {
             //console.log(Array.from(event.participants).includes(req.user.username))
 
             if (event.participants.includes(req.user.username) && (event.owner != req.user.id)) {
-                console.log(event.participants.includes(req.user.username))
+                //console.log(event.participants.includes(req.user.username))
                 participatingEvents.push(event)
             }
         });
@@ -153,13 +153,6 @@ router.post("/", [auth, [
             return res.status(400).json({ errors: errors.array() })
         }
 
-        //Build User's Participant
-        // const participantUser = {
-        //     username: req.user.username,
-        //     numVotes: 3,
-        //     owner: true
-        // }
-
         //Build new Event Object
         const eventFields = {
             owner: req.user.id,
@@ -183,28 +176,34 @@ router.post("/", [auth, [
     }
 );
 
-//Post Participant into Participant List
-// router.post('/:event_id/participants', async (req, res) => {
+//GET Event's Participants List
+// router.get('/:event_id/participants', async (req, res) => {
 //     try {
-//         const event = await Event.findById(req.params.event_id);
-//         if (event) {
+//         const event = away Event.findById(req.params.event_id);
+//         if(event) {
 
-//             const newParticipant = {
-//                 username: req.body.username,
-//                 numVotes: 3,
-//                 owner: false
-//             }
-
-//             event.participants.push(newParticipant)
-//             await event.save();
-//             res.json(event);
 //         }
-
-//     } catch (err) {
+//     } catch(err) {
 //         console.error(err.message);
-//         res.status(500).send("Server Error failed to add friend")
+//         res.status(500).send("Server Error failed to GET Participants List ")
 //     }
 // });
+
+//Post Participant into Participant List
+router.post('/:event_id/participants/:participant_username', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.event_id);
+        if (event) {
+            event.participants.push(req.params.participant_username)
+            await event.save();
+            res.json(event);
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error failed to add friend")
+    }
+});
 
 
 

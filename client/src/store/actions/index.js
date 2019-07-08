@@ -13,7 +13,8 @@ export {
     getVenues,
     addVenue,
     setSelectedVenue,
-    loadSelectedEvent
+    loadSelectedEvent,
+    addParticipant
 } from './eventBuilder';
 
 export {
