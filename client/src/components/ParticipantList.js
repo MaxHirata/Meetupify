@@ -22,7 +22,6 @@ import uuid from 'uuid';
 class ParticipantList extends Component {
 
     state = {
-        participants: ["Trever", "Sandy", "Ryan", "Max", "Evan"],
         newParticipant: ""
     }
 

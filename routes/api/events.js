@@ -135,6 +135,51 @@ router.get('/:id/votes', (req, res, next) => {
         })
 });
 
+/**
+ * @route POST /api/:event_id/votes
+ * @desc Sends a new Vote within the Event
+ * @access Public
+ */
+router.post('/:event_id/votes', auth, async (req, res) => {
+
+    let event = await Event.findById(req.params.event_id);
+
+    let userVoteCount = 0;
+    event.votes.forEach(function (vote) {
+        if (vote.voterName == req.user.username) {
+            userVoteCount++;
+        }
+    });
+
+    //Check is User has voted more than the limit 
+    if (userVoteCount >= 3) {
+        console.log(req.user.username + " has vote too many times.....vote cancelled");
+        res.json({ success: false });
+    } else {
+
+        const vote = {
+            voterName: req.user.username,
+            venue: req.body.venue,
+            _id: new mongoose.Types.ObjectId
+        }
+
+        try {
+            event.votes.push(vote);
+            res.json(event.votes);
+            await event.save();
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error with Sending Vote");
+        }
+    }
+});
+
+/**
+ * @route POST /api/
+ * @desc
+ * @access
+ */
+
 
 
 //POST New Event
@@ -253,10 +298,58 @@ router.put('/:id/deadlineDate', (req, res, next) => {
 
 
 /**
- * @route POST /api/:id/vote
+ * @route POST /api/events/finalEvent
  * @desc Add Vote to Event
  * @access Private
  */
+router.post('/:event_id/finalEvent', async (req, res) => {
+    let event = await Event.findById(req.params.event_id);
+    let currDate = new Date();
+    //console.log(event);
+    if (currDate < event.deadlineTime) {
+        //calculate the FINAL EVENT from the votes
+
+        let dict = {}
+        let finalEvent = {
+            numVotes: 0,
+            venue: null
+        }
+
+        for (let i = 0; i < event.votes.length; i++) {
+
+            if (dict[event.votes[i].venue.id] === NaN || dict[event.votes[i].venue.id] === undefined) {
+                dict[event.votes[i].venue.id] = 1;
+                if (finalEvent.venue === null) {
+                    finalEvent.venue = event.votes[i].venue
+                    finalEvent.numVotes = 1
+                }
+            } else {
+                dict[event.votes[i].venue.id] += 1
+                if (finalEvent.numVotes < dict[event.votes[i].venue]) {
+                    finalEvent.numVotes = dict[event.votes[i].venue]
+                    finalEvent.venue = event.votes[i].venue
+                }
+            }
+            console.log(dict[event.votes[i].venue.id]);
+        }
+        console.log(dict);
+
+        event.finalEvent = finalEvent.venue;
+
+        //set active to false
+        event.active = false;
+        res.json(event);
+
+        //save the updates to the event to the database
+        await event.save();
+    }
+    else {
+        console.log("Fail: Current time is still BEFORE the deadlineTime");
+        res.json({ success: false });
+    }
+});
+
+
 // router.post('/:id/vote', (req, res, next) => {
 //     const selectedVenue = {
 //         name: req.body.name,

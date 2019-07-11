@@ -89,6 +89,20 @@ export const removeVenue = (venue) => {
 
 }
 
+export const sendVote = (event_id, venue) => async dispatch => {
+    try {
+        await axios.post(`/api/events/${event_id}/votes`, {
+            venue: venue
+        });
+        dispatch({
+            type: actionTypes.SEND_VOTE
+        });
+
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
 // export const sendVoteStart = ( voteData ) => {
 //     return {
 //         type: actionTypes.GET_VENUES
