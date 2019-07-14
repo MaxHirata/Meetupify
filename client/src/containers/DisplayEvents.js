@@ -10,6 +10,7 @@ import EventItem from '../components/EventItem';
 import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import CreateEvent from '../components/CreateEvent';
 import { Redirect } from 'react-router-dom';
 
 
@@ -95,6 +96,7 @@ class DisplayEvents extends Component {
                 <Jumbotron>
                     <h2>My Events</h2>
                     <hr className='my-2' />
+                    <CreateEvent />
                     {events !== undefined ? displayEvents : null}
                     {/* <CardGroup>
                         <Row>

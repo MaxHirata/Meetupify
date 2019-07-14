@@ -8,6 +8,7 @@ const initialState = {
     selectedEvent: null
 };
 
+
 const getAllEvents = (state, action) => {
     return updateObject(state, {
         eventList: action.payload
@@ -31,6 +32,7 @@ export default function (state = initialState, action) {
         case actionTypes.GET_ALL_EVENTS: return getAllEvents(state, action);
         case actionTypes.GET_PARTICIPATING_EVENTS: return getParticipatingEvents(state, action)
         case actionTypes.SELECT_EVENT: return setSelectedEvent(state, action);
+        case actionTypes.CREATE_EVENT:
         case actionTypes.DELETE_EVENT:
         default:
             return state;

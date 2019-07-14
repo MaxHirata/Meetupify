@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import { setAlert } from './alerts';
 
 export const loadSelectedEvent = (event_id) => async dispatch => {
     const res = await axios.get(`/api/events/${event_id}`)
@@ -90,6 +91,7 @@ export const removeVenue = (venue) => {
 }
 
 export const sendVote = (event_id, venue) => async dispatch => {
+
     try {
         await axios.post(`/api/events/${event_id}/votes`, {
             venue: venue
@@ -97,8 +99,9 @@ export const sendVote = (event_id, venue) => async dispatch => {
         dispatch({
             type: actionTypes.SEND_VOTE
         });
-
+        dispatch(setAlert("Vote Sent!", "success"));
     } catch (err) {
+        //dispatch(setAlert("Send Vote Failed...", "danger"));
         console.error(err.message);
     }
 }

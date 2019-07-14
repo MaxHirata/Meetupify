@@ -20,7 +20,7 @@ export const REMOVE_PARTICIPANT = 'REMOVE_PARTICIPANT';
 
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const LOAD_SELECTED_EVENT = 'LOAD_SELECTED_EVENT';
-export const CREATE_EVENT = 'GET_EVENTS';
+export const CREATE_EVENT = 'GET_EVENTc';
 export const DELETE_EVENT = 'DELETE_EVENT';
 
 export const GET_VENUES = 'GET_VENUES';

@@ -46,7 +46,6 @@ class ParticipantList extends Component {
             <ListGroup>
                 <ListGroupItem active>
                     <ListGroupItemHeading>Event Participants</ListGroupItemHeading>
-                    <ListGroupItemText>Add Participant's Username to Event for Voting</ListGroupItemText>
                 </ListGroupItem>
 
                 <InputGroup>

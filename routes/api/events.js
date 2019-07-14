@@ -8,6 +8,48 @@ const { check, validationResult } = require('express-validator/check');
 const User = require('../../models/User');
 const Event = require('../../models/Event');
 
+//POST New Event
+/**
+ * @route POST /api/events/
+ * @desc Create New Event
+ * @access Private
+ */
+router.post("/", [auth, [
+    check('eventName', 'Event Name is required').not().isEmpty(),
+    check('deadlineTime', 'Deadline Time is Required').not().isEmpty()
+]],
+    async (req, res) => {
+        const errors = validationResult(req);
+        console.log(errors.isEmpty());
+        if (!errors.isEmpty()) {
+            console.log(errors);
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        console.log("Inside Create Event ROUTE");
+
+        //Build new Event Object
+        const eventFields = {
+            owner: req.user.id,
+            eventName: req.body.eventName,
+            deadlineTime: req.body.deadlineTime,
+            participants: [req.user.username],
+            finalEvent: null
+        };
+
+        try {
+            //Create
+            let event = new Event(eventFields);
+
+            await event.save();
+            res.json(event);
+
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error3");
+        }
+    }
+);
 
 /**
  * @route GET /api/events/me
@@ -126,14 +168,14 @@ router.get('/:event_id/venues', (req, res, next) => {
  * @desc GET Event's Votes (Still in the Works, May do Calculation for Votes)
  * @access Public
  */
-router.get('/:id/votes', (req, res, next) => {
-    Event.findById(req.params.id)
-        .then(event => {
-            res.json(event.votes);
-            //calc votes
-            //check the timeStamp
-        })
-});
+// router.get('/:id/votes', (req, res, next) => {
+//     Event.findById(req.params.id)
+//         .then(event => {
+//             res.json(event.votes);
+//             //calc votes
+//             //check the timeStamp
+//         })
+// });
 
 /**
  * @route POST /api/:event_id/votes
@@ -157,6 +199,7 @@ router.post('/:event_id/votes', auth, async (req, res) => {
         res.json({ success: false });
     } else {
 
+        console.log(req.body.venue)
         const vote = {
             voterName: req.user.username,
             venue: req.body.venue,
@@ -182,44 +225,7 @@ router.post('/:event_id/votes', auth, async (req, res) => {
 
 
 
-//POST New Event
-/**
- * @route POST /api/events/
- * @desc Create New Event
- * @access Private
- */
-router.post("/", [auth, [
-    check('eventName', 'Event Name is required').not().isEmpty(),
-    check('deadlineTime', 'Deadline Time is Required').not().isEmpty()
-]],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
-        }
 
-        //Build new Event Object
-        const eventFields = {
-            owner: req.user.id,
-            eventName: req.body.eventName,
-            deadlineTime: req.body.deadlineTime,
-            participants: [req.user.username],
-            finalEvent: null
-        };
-
-        try {
-            //Create
-            let event = new Event(eventFields);
-
-            await event.save();
-            res.json(event);
-
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send("Server Error3");
-        }
-    }
-);
 
 //GET Event's Participants List
 // router.get('/:event_id/participants', async (req, res) => {
@@ -298,11 +304,11 @@ router.put('/:id/deadlineDate', (req, res, next) => {
 
 
 /**
- * @route POST /api/events/finalEvent
+ * @route PATCH /api/events/finalEvent
  * @desc Add Vote to Event
  * @access Private
  */
-router.post('/:event_id/finalEvent', async (req, res) => {
+router.patch('/:event_id/finalEvent', async (req, res) => {
     let event = await Event.findById(req.params.event_id);
     let currDate = new Date();
     //console.log(event);
@@ -348,32 +354,6 @@ router.post('/:event_id/finalEvent', async (req, res) => {
         res.json({ success: false });
     }
 });
-
-
-// router.post('/:id/vote', (req, res, next) => {
-//     const selectedVenue = {
-//         name: req.body.name,
-//         location: req.body.location,
-//         link: req.body.link,
-//         image: req.body.image,
-//         price: req.body.price,
-//         rating: req.body.rating
-//     }
-
-//     const newVote = {
-//         _id: new mongoose.Types.ObjectId,
-//         venue: selectedVenue,
-//         voterName: req.body.voterName,
-//         timeStamp: req.body.timeStamp
-//     }
-
-//     Event.findById(req.params.id)
-//         .then(event => {
-//             event.votes.push(newVote);
-//             event.save().then(() => res.json(event));
-//         })
-//         .catch(err => res.status(404).json({ error: 'not working....' }));
-// });
 
 
 /**

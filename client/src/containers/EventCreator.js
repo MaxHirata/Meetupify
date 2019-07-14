@@ -24,6 +24,16 @@ class EventCreator extends Component {
         }
     }
 
+    onSendVoteHandler = () => {
+        this.props.setAlert(this.props.currentEventId, "success");
+        if (this.props.selectedVenue === null) {
+            this.props.setAlert("No Venue was Set for Vote", "danger");
+        } else {
+            this.props.sendVote(this.props.currentEventId, this.props.selectedVenue);
+            this.props.setAlert("Vote Sent!!!", "success");
+        }
+    }
+
     render() {
 
         // if (!this.props.isAuthenticated) {
@@ -58,11 +68,12 @@ class EventCreator extends Component {
                         <ParticipantList />
                     </Col>
                     <Col lg={9} md={9} sm={12}>
+                        <Button onClick={this.onSendVoteHandler}>Send Vote</Button>
                         <EventPicker />
                     </Col>
                 </Row>
                 <TimePicker />
-                <Button>Submit</Button>
+
             </Container>
         );
     }
@@ -71,12 +82,15 @@ class EventCreator extends Component {
 const maptStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
     currentEventName: state.event.eventName,
-    currentEventId: state.eventList.selectedEvent
+    currentEventId: state.eventList.selectedEvent,
+    selectedVenue: state.event.selectedVenue
 });
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadCurrentEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id))
+        loadCurrentEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id)),
+        sendVote: (event_id, venue) => dispatch(actions.sendVote(event_id, venue)),
+        setAlert: (msg, alertType) => dispatch(actions.setAlert(msg, alertType))
     }
 };
 

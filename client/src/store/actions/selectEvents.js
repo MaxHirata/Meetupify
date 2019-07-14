@@ -84,10 +84,18 @@ export const selectEvent = (event_id) => {
     }
 }
 
-export const postEvent = (eventName) => {
-    return {
-        type: actionTypes.CREATE_EVENT,
-        payload: eventName
+export const createEvent = (eventData) => async dispatch => {
+    console.log("Inside Create Create Event Action");
+    const body = JSON.stringify(eventData);
+
+    await axios.post('/api/events/', eventData);
+
+    try {
+        dispatch({
+            type: actionTypes.CREATE_EVENT
+        })
+    } catch (err) {
+        console.error(err.message);
     }
 }
 

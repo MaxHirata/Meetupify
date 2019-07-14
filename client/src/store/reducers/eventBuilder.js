@@ -196,6 +196,7 @@ export default function (state = newInitialState, action) {
             return setSelectedVenue(state, action);
         case actionTypes.LOAD_SELECTED_EVENT:
         case actionTypes.ADD_PARTICIPANT:
+        case actionTypes.SEND_VOTE:
             return loadSelectedEventHandler(state, action);
         case actionTypes.ADD_VENUE:
         default:
