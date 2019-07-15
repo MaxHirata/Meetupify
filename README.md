@@ -11,7 +11,8 @@ The Logging in will send a request to a backend auth route and generated a token
 - Login requires: user Email Address, Password
 - Registering a New User requires: Username, Email, Password, and Password verification
 
-<img src="/readMeImages/Login.png">
+<img src="/readMeImages/Login.png" width="400">
+<img src="/readMeImages/Register.png" width="400">
 
 After Logging In, you are redirected to the Select Events tabe.
 - You can create a New Event and a modal will appear for data input for the Name of the Event, Deadline for Voting, and the actual date of the event.
