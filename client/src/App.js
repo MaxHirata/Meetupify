@@ -51,11 +51,6 @@ class App extends Component {
               <div className="">
                 {routes}
               </div>
-
-
-
-
-
             </Layout>
           </div>
         </BrowserRouter>

@@ -81,7 +81,8 @@ class EventCreator extends Component {
                     <Col lg={3} md={3} sm={12}>
                         <ParticipantList />
                     </Col>
-                    {this.props.eventState ? voteVenueDisplay : finalEventDisplay}
+                    {/* {this.props.eventState ? voteVenueDisplay : finalEventDisplay} */}
+                    {voteVenueDisplay}
 
                 </Row>
 
