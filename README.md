@@ -1,4 +1,6 @@
 # QHangout
+NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
+
 Hangout Planner App Built on the MERN Stack with Yelp Fusion API
 - React.js
 - Redux
@@ -16,10 +18,11 @@ The Logging in will send a request to a backend auth route and generated a token
 
 After Logging In, you are redirected to the Select Events tabe.
 - You can create a New Event and a modal will appear for data input for the Name of the Event, Deadline for Voting, and the actual date of the event.
+<img src="/readMeImages/CreateEvent.png" width="400">
 - From here, you can select an event, then a new option for the "Current Event" should appear in the NavBar
 - A User can also see what Events they are also particpating in as well
-<img src="/readMeImages/SelectedEvents.png" width="400">
-<img src="/readMeImages/CreateEvent.png" width="400">
+<img src="/readMeImages/SelectEvents.png" width="400">
+
 
 
  Going to the Add Venues tab:
