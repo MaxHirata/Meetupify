@@ -1,7 +1,22 @@
 export {
+    setAlert
+} from './alerts';
+
+export {
+    loadUser,
+    loginUser,
+    logout,
+    register
+} from './auth';
+
+export {
     getVenues,
     addVenue,
-    setSelectedVenue
+    setSelectedVenue,
+    loadSelectedEvent,
+    addParticipant,
+    sendVote,
+    setFinalEvent
 } from './eventBuilder';
 
 export {
@@ -12,7 +27,8 @@ export {
 
 export {
     getAllEvents,
+    createEvent,
     selectEvent,
-    postEvent,
+    getParticipatingEvents,
     deleteEvent
 } from './selectEvents';

@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EventSchema = require('./Event');
-
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -17,8 +15,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    _id: mongoose.Schema.Types.ObjectId
+    }
 
 });
 

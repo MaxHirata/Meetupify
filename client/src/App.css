@@ -20,6 +20,7 @@
 
 .App-link {
   color: #61dafb;
+  opacity: .1;
 }
 
 @keyframes App-logo-spin {
@@ -29,4 +30,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+html {
+  margin: 0;
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  height: 100%;
+  background-image: linear-gradient(90deg,purple,red);
+} 
+
+.center {
+  margin: auto;
+}
+
+.authForm {
+  padding-top: 20px;
+}
+
+.authFormInput {
+  margin: auto;
+  display: inline-block;
+  text-align: center;
+}
+
+.row {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.searchForm {
+  margin: auto;
+  text-align: center;
+}
+
+.background-theme {
+  
+  background-size: 100%;
+  height: 100%;
 }
