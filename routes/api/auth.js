@@ -41,6 +41,7 @@ router.post(
         if (!errors.isEmpty()) {
             return res.status(404).json({ errors: errors.array() });
         }
+        console.log("Inside Login");
 
         const { email, password } = req.body
 

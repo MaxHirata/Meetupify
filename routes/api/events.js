@@ -276,7 +276,11 @@ router.patch('/:event_id/finalEvent', async (req, res) => {
     let currDate = new Date().getTime();
     let deadlineDate = new Date(event.deadlineTime).getTime();
 
-    if (currDate < deadlineDate) {
+    //console.log("FLAG FIRING FINAL EVENT ENDPOINT!!!");
+    //console.log("Currend Date > deadline Date ", currDate > deadlineDate);
+    if (currDate > deadlineDate) {
+
+        //console.log("Processing Final Event FLAG");
         //calculate the FINAL EVENT from the votes
 
         let dict = {}
@@ -300,9 +304,9 @@ router.patch('/:event_id/finalEvent', async (req, res) => {
                     finalEvent.venue = event.votes[i].venue
                 }
             }
-            console.log(dict[event.votes[i].venue.id]);
+            //console.log(dict[event.votes[i].venue.id]);
         }
-        console.log(dict);
+        //console.log(dict);
 
         event.finalEvent = finalEvent.venue;
 
@@ -313,10 +317,10 @@ router.patch('/:event_id/finalEvent', async (req, res) => {
         //save the updates to the event to the database
         await event.save();
     }
-    else {
-        console.log("Fail: Current time is still BEFORE the deadlineTime");
-        res.json({ success: false });
-    }
+    // else {
+    //     console.log("Fail: Current time is still BEFORE the deadlineTime");
+    //     res.json({ success: false });
+    // }
 });
 
 
