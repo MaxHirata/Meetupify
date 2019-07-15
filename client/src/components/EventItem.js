@@ -8,11 +8,20 @@ import {
     CardSubtitle,
     Button
 } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 const eventItem = (props) => {
     let status = 'ACTIVE';
+
     if (props.status === false) {
         status = 'PAST'
+    }
+
+    let selected = false;
+
+    const onSelectEventHandler = () => {
+        props.selectEvent(props.event_id);
+        selected = true;
     }
 
     return (
@@ -23,7 +32,8 @@ const eventItem = (props) => {
                 </CardTitle>
                 <CardSubtitle><h4>{status}</h4></CardSubtitle>
                 <CardText>Deadline: {props.deadlineTime}</CardText>
-                <Button color="danger" onClick={() => props.selectEvent(props.event_id)}>Select</Button>
+                <Button color="danger" onClick={() => onSelectEventHandler()}>Select</Button>
+                {selected === true ? <Redirect to="/eventBuilder" /> : null}
             </CardBody>
         </Card>
     );

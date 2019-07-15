@@ -8,7 +8,9 @@ export const loadSelectedEvent = (event_id) => async dispatch => {
         dispatch({
             type: actionTypes.LOAD_SELECTED_EVENT,
             payload: res.data
-        })
+        });
+
+        dispatch(setFinalEvent(event_id));
     } catch (err) {
         console.error(err.message);
     }
@@ -102,6 +104,17 @@ export const sendVote = (event_id, venue) => async dispatch => {
         dispatch(setAlert("Vote Sent!", "success"));
     } catch (err) {
         //dispatch(setAlert("Send Vote Failed...", "danger"));
+        console.error(err.message);
+    }
+}
+
+export const setFinalEvent = (event_id) => async dispatch => {
+    try {
+        await axios.patch(`/api/events/${event_id}/finalEvent`);
+        dispatch({
+            type: actionTypes.SET_FINAL_EVENT
+        })
+    } catch (err) {
         console.error(err.message);
     }
 }

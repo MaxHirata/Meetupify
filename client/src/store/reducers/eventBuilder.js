@@ -96,7 +96,7 @@ const newInitialState = {
     eventName: "",
     deadlineTime: null,
     eventDate: null,
-    active: false,
+    active: true,
     finalEvent: null,
     participants: [],
     venueList: [],
@@ -156,6 +156,7 @@ const loadSelectedEventHandler = (state, action) => {
         participants: action.payload.participants,
         venueList: action.payload.venueList,
         active: action.payload.active,
+        finalEvent: action.payload.finalEvent,
         deadlineTime: action.payload.deadlineTime,
         votes: action.payload.votes
     });
@@ -195,10 +196,11 @@ export default function (state = newInitialState, action) {
         case actionTypes.SET_SELECTED_VENUE:
             return setSelectedVenue(state, action);
         case actionTypes.LOAD_SELECTED_EVENT:
-        case actionTypes.ADD_PARTICIPANT:
-        case actionTypes.SEND_VOTE:
             return loadSelectedEventHandler(state, action);
         case actionTypes.ADD_VENUE:
+        case actionTypes.SET_FINAL_EVENT:
+        case actionTypes.ADD_PARTICIPANT:
+        case actionTypes.SEND_VOTE:
         default:
             return state;
     }

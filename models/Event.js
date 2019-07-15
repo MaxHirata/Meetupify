@@ -18,12 +18,6 @@ const VoteSchema = new Schema({
     timeStamp: { type: Date, default: Date.now }
 });
 
-const ParticipantSchema = new Schema({
-    username: { type: String, required: true },
-    numVotes: { type: Number, default: 3 },
-    owner: { type: Boolean, default: false }
-});
-
 //Event Schema
 const EventSchema = new Schema({
     owner: {

@@ -35,7 +35,7 @@ class AppNavbar extends Component {
                         <h6 style={{ color: 'white', margin: '5px 8px' }}>Sign In</h6>
                     </NavLink>
                 </NavItem>
-
+                {/* 
                 <NavItem>
                     <NavLink to="/displayEvents" exact>
                         <h6 style={{ color: 'white', margin: '5px 8px' }}>Select Events</h6>
@@ -53,9 +53,18 @@ class AppNavbar extends Component {
                 </NavItem>
                 <NavItem onClick={this.props.logout}>
                     <h6 style={{ color: 'white', margin: '5px 8px' }}>Logout</h6>
-                </NavItem>
+                </NavItem> */}
             </Nav>
         );
+
+        const eventBuilderLink = (
+            <NavItem>
+                <NavLink to="/eventBuilder">
+                    <h6 style={{ color: 'white', margin: '5px 8px' }}>Current Event</h6>
+                </NavLink>
+            </NavItem>
+        );
+
 
         const authorizedLinks = (
             <Nav className="ml-auto" navbar>
@@ -64,11 +73,9 @@ class AppNavbar extends Component {
                         <h6 style={{ color: 'white', margin: '5px 8px' }}>Select Events</h6>
                     </NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink to="/eventBuilder">
-                        <h6 style={{ color: 'white', margin: '5px 8px' }}>Current Event</h6>
-                    </NavLink>
-                </NavItem>
+
+                {this.props.selectedEventId != null ? eventBuilderLink : null}
+
                 <NavItem>
                     <NavLink to="/addVenues">
                         <h6 style={{ color: 'white', margin: '5px 8px' }}>Add Venues</h6>
@@ -98,7 +105,8 @@ class AppNavbar extends Component {
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     username: state.auth.username,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    selectedEventId: state.eventList.selectedEvent
 });
 
 const mapDispatchToProps = dispatch => {

@@ -32,15 +32,15 @@ class DisplayEvents extends Component {
         const events = this.props.events;
         const participatingEvents = this.props.participatingEvents;
 
-        console.log("My Events Data")
-        console.log(events)
+        // console.log("My Events Data")
+        // console.log(events)
 
-        console.log("ParticipatingEvents")
-        console.log(participatingEvents)
+        // console.log("ParticipatingEvents")
+        // console.log(participatingEvents)
 
-        // if (!this.props.isAuthenticated) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         let displayEvents = (
             <CardGroup>
@@ -51,7 +51,7 @@ class DisplayEvents extends Component {
                                 key={uuid}
                                 event_id={event._id}
                                 eventName={event.eventName}
-                                status={event.status}
+                                status={event.active}
                                 deadlineTime={event.deadlineTime}
                                 selectEvent={this.props.setSelectedEvent} />
                         </Col>
@@ -71,7 +71,7 @@ class DisplayEvents extends Component {
                                 key={uuid}
                                 event_id={event._id}
                                 eventName={event.eventName}
-                                status={event.status}
+                                status={event.active}
                                 deadlineTime={event.deadlineTime}
                                 selectEvent={this.props.setSelectedEvent} />
                         </Col>
@@ -98,23 +98,6 @@ class DisplayEvents extends Component {
                     <hr className='my-2' />
                     <CreateEvent />
                     {events !== undefined ? displayEvents : null}
-                    {/* <CardGroup>
-                        <Row>
-                            {events.map((event) => (
-                                <Col lg={3} md={4} sm={12} style={colStyle}>
-                                    <EventItem
-                                        key={uuid}
-                                        event_id={event._id}
-                                        eventName={event.eventName}
-                                        status={event.status}
-                                        deadlineTime={event.deadlineTime}
-                                        selectEvent={this.props.setSelectedEvent} />
-                                </Col>
-
-                            ))}
-                        </Row>
-
-                    </CardGroup> */}
                 </Jumbotron>
 
                 <Jumbotron>

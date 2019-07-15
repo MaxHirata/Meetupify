@@ -15,7 +15,8 @@ export {
     setSelectedVenue,
     loadSelectedEvent,
     addParticipant,
-    sendVote
+    sendVote,
+    setFinalEvent
 } from './eventBuilder';
 
 export {

@@ -30,6 +30,8 @@ export const VENUES_LOADING = 'ITEMS_LOADING';
 
 export const SEND_VOTE = 'SEND_VOTE';
 
+export const SET_FINAL_EVENT = 'SET_FINAL_EVENT';
+
 export const SET_SELECTED_VENUE = 'SET_SELECTED_VENUE';
 export const SET_SELECTED_TIME = "SET_SELECTED_TIME";
 

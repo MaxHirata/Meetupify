@@ -117,26 +117,6 @@ router.get('/participatingEvents', auth, async (req, res) => {
     }
 });
 
-//GET EVENT(S) BY OWNER ID -- OLD
-// router.get('/:owner_id', async (req, res) => {
-//     try {
-//         const events = await Event.find({ owner: req.params.owner_id }).populate('owner', ['eventName', 'deadlineTime']);
-
-//         if (!events) return res.status(400).json({ msg: 'This User Has No EVENTS....' });
-//         res.json(events);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error4');
-//         if (err.kind == 'ObjectId') {
-//             return res.status(400).json({ msg: 'Events NOT FOUND' });
-//         }
-//     }
-// });
-
-
-
-
-
 /**
  * @route GET /api/events/:id
  * @desc Get Event Info By Event Id
@@ -223,23 +203,6 @@ router.post('/:event_id/votes', auth, async (req, res) => {
  * @access
  */
 
-
-
-
-
-//GET Event's Participants List
-// router.get('/:event_id/participants', async (req, res) => {
-//     try {
-//         const event = away Event.findById(req.params.event_id);
-//         if(event) {
-
-//         }
-//     } catch(err) {
-//         console.error(err.message);
-//         res.status(500).send("Server Error failed to GET Participants List ")
-//     }
-// });
-
 //Post Participant into Participant List
 router.post('/:event_id/participants/:participant_username', async (req, res) => {
     try {
@@ -310,9 +273,10 @@ router.put('/:id/deadlineDate', (req, res, next) => {
  */
 router.patch('/:event_id/finalEvent', async (req, res) => {
     let event = await Event.findById(req.params.event_id);
-    let currDate = new Date();
-    //console.log(event);
-    if (currDate < event.deadlineTime) {
+    let currDate = new Date().getTime();
+    let deadlineDate = new Date(event.deadlineTime).getTime();
+
+    if (currDate < deadlineDate) {
         //calculate the FINAL EVENT from the votes
 
         let dict = {}
