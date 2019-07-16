@@ -6,13 +6,10 @@ import {
     Label,
     Input,
     Row,
-    FormText,
     Button
 
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { setAlert } from '../../store/actions/alerts';
 import { register } from '../../store/actions/auth';

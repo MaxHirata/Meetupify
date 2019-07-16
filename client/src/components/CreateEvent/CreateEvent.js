@@ -11,7 +11,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
-import * as actions from '../store/actions/index';
+import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 class createEvent extends Component {

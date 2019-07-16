@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import Layout from './hoc/Layout';
-import EventCreator from './containers/EventCreator';
-import DisplayEvents from './containers/DisplayEvents';
-import AddYelpVenues from './containers/AddNewVenues';
-import LoginSignUp from './containers/Auth';
+import EventCreator from './containers/EventCreator/EventCreator';
+import DisplayEvents from './containers/DisplayEvents/DisplayEvents';
+import AddYelpVenues from './containers/AddNewVenues/AddNewVenues';
+import LoginSignUp from './containers/Auth/Auth';
 import AlertBar from './hoc/AlertBar'
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -13,7 +13,6 @@ import { loadUser } from './store/actions/auth';
 import { setAuthToken } from './shared/utilities';
 
 import { BrowserRouter, Switch, Route, withRouter, Redirect } from 'react-router-dom';
-import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import eventBuilder from './store/reducers/eventBuilder';
 

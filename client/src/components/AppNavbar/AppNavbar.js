@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import {
-    Container,
     Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    Alert,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavItem
 } from 'reactstrap';
 import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/index';
+import * as actions from '../../store/actions/index';
 
 class AppNavbar extends Component {
 
