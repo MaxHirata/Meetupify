@@ -163,38 +163,37 @@ router.get('/:event_id/venues', (req, res, next) => {
  * @access Public
  */
 router.post('/:event_id/votes', auth, async (req, res) => {
+    try {
+        let event = await Event.findById(req.params.event_id);
 
-    let event = await Event.findById(req.params.event_id);
+        let userVoteCount = 0;
+        event.votes.forEach(function (vote) {
+            if (vote.voterName == req.user.username) {
+                userVoteCount++;
+            }
+        });
 
-    let userVoteCount = 0;
-    event.votes.forEach(function (vote) {
-        if (vote.voterName == req.user.username) {
-            userVoteCount++;
-        }
-    });
+        //Check is User has voted more than the limit 
+        if (userVoteCount >= 3) {
+            console.log(req.user.username + " has vote too many times.....vote cancelled");
+            res.json({ success: false });
+        } else {
 
-    //Check is User has voted more than the limit 
-    if (userVoteCount >= 3) {
-        console.log(req.user.username + " has vote too many times.....vote cancelled");
-        res.json({ success: false });
-    } else {
-
-        console.log(req.body.venue)
-        const vote = {
-            voterName: req.user.username,
-            venue: req.body.venue,
-            _id: new mongoose.Types.ObjectId
-        }
-
-        try {
+            //console.log(req.body.venue)
+            const vote = {
+                voterName: req.user.username,
+                venue: req.body.venue,
+                _id: new mongoose.Types.ObjectId
+            }
             event.votes.push(vote);
             res.json(event.votes);
             await event.save();
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send("Server Error with Sending Vote");
         }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error with Sending Vote");
     }
+
 });
 
 /**

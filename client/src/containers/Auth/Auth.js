@@ -5,8 +5,8 @@ import {
     ButtonGroup
 
 } from 'reactstrap';
-import LoginUser from '../components/Auth/LoginUser';
-import RegisterUser from '../components/Auth/RegisterUser';
+import LoginUser from '../../components/Auth/LoginUser';
+import RegisterUser from '../../components/Auth/RegisterUser';
 
 class Auth extends Component {
     state = {

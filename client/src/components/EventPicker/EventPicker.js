@@ -7,8 +7,8 @@ import {
     CardGroup
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/index';
-import VenueItem from '../components/VenueItem';
+import * as actions from '../../store/actions/index';
+import VenueItem from '../VenueItem/VenueItem';
 
 
 /* Inline Styles */

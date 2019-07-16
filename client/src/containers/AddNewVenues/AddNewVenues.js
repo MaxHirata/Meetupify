@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import VenueItem from './../components/VenueItem';
+import VenueItem from '../../components/VenueItem/VenueItem';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/index';
-import { updateObject } from '../shared/utilities';
+import * as actions from '../../store/actions/index';
+import { updateObject } from '../../shared/utilities';
 import { Redirect } from 'react-router-dom';
 
 import {

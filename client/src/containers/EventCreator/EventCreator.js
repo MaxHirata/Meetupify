@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import EventPicker from '../components/EventPicker';
-import TimePicker from '../components/TimePicker';
-import DeadlineTime from '../components/DeadlineTime';
-import ParticipantList from '../components/ParticipantList';
-import FinalEvent from '../components/FinalEvent';
-import * as actions from '../store/actions/';
+import EventPicker from '../../components/EventPicker/EventPicker';
+//import TimePicker from '../components/TimePicker';
+import DeadlineTime from '../../components/DeadlineTime/DeadlineTime';
+import ParticipantList from '../../components/ParticipantList/ParticipantList';
+import FinalEvent from '../../components/FinalEvent/FinalEvent';
+import * as actions from '../../store/actions';
 import {
     Container,
     Row,

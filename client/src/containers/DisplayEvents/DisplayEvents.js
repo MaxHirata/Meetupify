@@ -6,11 +6,11 @@ import {
     Col,
     Jumbotron
 } from 'reactstrap';
-import EventItem from '../components/EventItem';
-import * as actions from '../store/actions/index';
+import EventItem from '../../components/EventItem/EventItem';
+import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-import CreateEvent from '../components/CreateEvent';
+import CreateEvent from '../../components/CreateEvent/CreateEvent';
 import { Redirect } from 'react-router-dom';
 
 

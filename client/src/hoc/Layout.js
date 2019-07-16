@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppNavBar from '../components/AppNavbar';
+import AppNavBar from '../components/AppNavbar/AppNavbar';
 
 class Layout extends Component {
     state = {
