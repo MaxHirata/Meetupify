@@ -1,6 +1,7 @@
 # QHangout
 NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
-CURRENT TODO:
+
+CURRENTLY WORKING ON:
 - WORK ON FRONT-END:
     - Refactor current placeholder bootstrap lines
     - implement styling with SASS
