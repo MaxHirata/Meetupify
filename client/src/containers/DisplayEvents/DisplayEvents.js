@@ -38,9 +38,9 @@ class DisplayEvents extends Component {
         // console.log("ParticipatingEvents")
         // console.log(participatingEvents)
 
-        // if (!this.props.isAuthenticated) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         let displayEvents = (
             <CardGroup>

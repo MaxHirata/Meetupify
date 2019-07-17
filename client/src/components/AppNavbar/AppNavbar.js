@@ -30,7 +30,7 @@ class AppNavbar extends Component {
                     </NavLink>
                 </NavItem>
 
-                <NavItem>
+                {/* <NavItem>
                     <NavLink to="/displayEvents" exact>
                         <h6 style={{ color: 'white', margin: '5px 8px' }}>Select Events</h6>
                     </NavLink>
@@ -47,7 +47,7 @@ class AppNavbar extends Component {
                 </NavItem>
                 <NavItem onClick={this.props.logout}>
                     <h6 style={{ color: 'white', margin: '5px 8px' }}>Logout</h6>
-                </NavItem>
+                </NavItem> */}
 
             </Nav>
         );
