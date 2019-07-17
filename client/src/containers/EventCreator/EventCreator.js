@@ -40,9 +40,9 @@ class EventCreator extends Component {
 
     render() {
 
-        if (!this.props.isAuthenticated) {
-            return <Redirect to="/" />
-        }
+        // if (!this.props.isAuthenticated) {
+        //     return <Redirect to="/" />
+        // }
 
         let voteVenueDisplay = (
             <Col lg={9} md={9} sm={12}>
