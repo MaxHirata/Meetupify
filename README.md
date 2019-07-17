@@ -1,5 +1,21 @@
 # QHangout
 NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
+CURRENT TODO:
+- WORK ON FRONT-END:
+    - Refactor current placeholder bootstrap lines
+    - implement styling with SASS
+
+BACKLOGGED TODO:
+- FINISH UP BACK-END:
+    - Finishup remaining api routes for:
+        - delete User
+        - delete Event
+        - delete Venue
+- TESTING
+    - Incorperate testing Framework:
+        - Jest or Mocha
+
+<hr>
 
 Hangout Planner App Built on the MERN Stack with Yelp Fusion API
 - React.js

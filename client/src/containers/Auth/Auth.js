@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import LoginUser from '../../components/Auth/LoginUser';
 import RegisterUser from '../../components/Auth/RegisterUser';
+import './auth.css';
 
 class Auth extends Component {
     state = {
@@ -27,8 +28,10 @@ class Auth extends Component {
                     <Button color={this.state.isLogin ? 'primary' : 'secondary'} onClick={this.switchAuthModeHandler}>Login</Button>
                     <Button color={!this.state.isLogin ? 'primary' : 'secondary'} onClick={this.switchAuthModeHandler}>Register User</Button>
                 </ButtonGroup>
+                <div className="auth">
+                    {this.state.isLogin ? <LoginUser /> : <RegisterUser />}
+                </div>
 
-                {this.state.isLogin ? <LoginUser /> : <RegisterUser />}
             </Container>
         )
     }
