@@ -1,0 +1,19 @@
+
+
+.eventCard {
+    margin: 2px 2px 2px 2px;
+    border: 2pt solid rgba(128, 128, 128, 0.692);
+
+    .statusPast {
+        color: crimson;
+    }
+
+    .statusActive {
+        color: green;
+    }
+
+    .deadline {
+        font-weight: bolder;
+        color: rgb(255, 108, 108);
+    }
+}

@@ -28,7 +28,7 @@ class Auth extends Component {
                     <Button color={this.state.isLogin ? 'primary' : 'secondary'} onClick={this.switchAuthModeHandler}>Login</Button>
                     <Button color={!this.state.isLogin ? 'primary' : 'secondary'} onClick={this.switchAuthModeHandler}>Register User</Button>
                 </ButtonGroup>
-                <div className="auth">
+                <div>
                     {this.state.isLogin ? <LoginUser /> : <RegisterUser />}
                 </div>
 

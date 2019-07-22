@@ -14,6 +14,8 @@ import {
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/actions/auth';
+import './auth.css';
+import logo from '../../resources/logo.png';
 
 class LoginUser extends Component {
     state = {
@@ -48,6 +50,7 @@ class LoginUser extends Component {
         return (
             <Container>
                 <div className="authForm">
+                    <img src={logo} width="200px" />
                     <Form>
                         <Row md={6}>
                             <div className="authFormInput">
