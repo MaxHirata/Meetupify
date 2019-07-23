@@ -1,0 +1,22 @@
+.eventCreator {
+  background-color: rgba(60, 83, 128, 0.623);
+  border-radius: 1em;
+  padding-bottom: 1em;
+}
+
+.eventCreator .currentEventHeader {
+  background-color: cornflowerblue;
+  border-radius: 0.5em;
+  margin: 0 -15px;
+}
+
+.eventCreator .deadlineHeader {
+  background-color: crimson;
+  border-radius: 2em;
+}
+
+.eventCreator .eventDateHeader {
+  background-color: aquamarine;
+  border-radius: 2em;
+}
+/*# sourceMappingURL=eventCreator.css.map */

@@ -18,6 +18,14 @@ import {
 } from 'reactstrap';
 import ParticipantItem from '../ParticipantItem/ParticipantItem';
 import uuid from 'uuid';
+import './participantList.css';
+
+/** Bootstrap Override Styling */
+const participantList = {
+    "border": "2pt solid rgba(128, 128, 128, 0.692)",
+    "background-color": "rgb(226, 220, 182)"
+}
+/**--------------------------- */
 
 class ParticipantList extends Component {
 
@@ -44,8 +52,8 @@ class ParticipantList extends Component {
 
 
             <ListGroup>
-                <ListGroupItem active>
-                    <ListGroupItemHeading>Event Participants</ListGroupItemHeading>
+                <ListGroupItem style={participantList}>
+                    <ListGroupItemHeading><h4>Participants</h4></ListGroupItemHeading>
                 </ListGroupItem>
 
                 <InputGroup>

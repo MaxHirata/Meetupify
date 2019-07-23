@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
     Container,
     Button,
@@ -110,8 +110,8 @@ class createEvent extends Component {
 
     render() {
         return (
-            <Container>
-                <Button color="danger" onClick={this.toggle}>Add New Event</Button>
+            <Fragment>
+                <Button color="danger" onClick={this.toggle}>New Event</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Create New Event</ModalHeader>
 
@@ -157,7 +157,7 @@ class createEvent extends Component {
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
-            </Container>
+            </Fragment>
 
 
         );

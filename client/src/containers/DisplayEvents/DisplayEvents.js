@@ -100,11 +100,17 @@ class DisplayEvents extends Component {
 
                 <div className="myEvents">
                     <div className="header">
-                        <h2>My Events</h2>
+                        <h2>My Events
+                            <span id="create-event-btn">
+                                <CreateEvent />
+                            </span>
+
+                        </h2>
+
                         <hr className='my-2' />
                     </div>
 
-                    <CreateEvent />
+
                     {events.length > 0 ? displayEvents : displayNoEvents}
                 </div>
 

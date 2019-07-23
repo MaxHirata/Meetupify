@@ -10,6 +10,7 @@ import {
 import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import './appNavbar.css'
 
 class AppNavbar extends Component {
 
@@ -82,11 +83,11 @@ class AppNavbar extends Component {
             </Nav>
         );
 
-        const usernameBrand = (<div style={{ color: 'white' }}>@{this.props.username}</div>);
+        const usernameBrand = (<div className="username">@{this.props.username}</div>);
 
         return (
-            <Navbar color="dark" dark expand="sm" className="mb-5">
-                <NavbarBrand href="/">Q-Hangout</NavbarBrand>
+            <Navbar color="dark" dark expand="sm" className="mb-4">
+                <NavbarBrand style={{ color: "rgb(204, 90, 204)", "font-weight": "bolder" }} className="app-name" href="/">Q-Hangout</NavbarBrand>
                 {this.props.isAuthenticated ? usernameBrand : null}
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>

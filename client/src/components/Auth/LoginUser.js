@@ -19,8 +19,8 @@ import logo from '../../resources/logo.png';
 
 class LoginUser extends Component {
     state = {
-        email: '',
-        password: ''
+        email: 'testPerson2@gmail.com',
+        password: 'test222'
     }
 
 

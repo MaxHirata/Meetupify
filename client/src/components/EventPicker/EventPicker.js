@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import {
     Jumbotron,
+    Container,
     Row,
     Col,
-    CardGroup
+    CardGroup,
+    Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import VenueItem from '../VenueItem/VenueItem';
+import './eventPicker.css';
 
 
 /* Inline Styles */
@@ -56,7 +59,8 @@ class EventPicker extends Component {
     render() {
         const venues = this.props.eventVenues;
         return (
-            <Jumbotron>
+            <Container className="eventPicker">
+                <Button onClick={this.onSendVoteHandler}>Send Vote</Button>
                 <CardGroup>
                     <Row className="justify-content-center">
                         {venues.map((venue) => (
@@ -77,7 +81,7 @@ class EventPicker extends Component {
                     </Row>
 
                 </CardGroup>
-            </Jumbotron>
+            </Container>
 
         );
     }
@@ -93,6 +97,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetVenues: (event_id) => dispatch(actions.getVenues(event_id)),
         onSelectVenue: (venueInfo) => dispatch(actions.setSelectedVenue(venueInfo)),
+        sendVote: (event_id, venue) => dispatch(actions.sendVote(event_id, venue)),
         loadSelectedEvent: (event_id) => dispatch(actions.loadSelectedEvent(event_id))
     }
 };

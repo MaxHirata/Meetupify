@@ -11,13 +11,12 @@
 .myEvents {
   background-color: #3c5380;
   margin-bottom: 0px;
+  position: relative;
   padding: 0 0 10px 0;
   border-radius: 1em;
   opacity: .9;
   -webkit-box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
           box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
-  -webkit-transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg);
-          transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg);
 }
 
 .myEvents .header {
@@ -25,6 +24,24 @@
   border-top-right-radius: 1em;
   padding-top: 10px;
   background-color: cornflowerblue;
+}
+
+.myEvents .header #create-event-btn {
+  position: absolute;
+  right: 1em;
+}
+
+@media screen and (max-width: 575px) {
+  .myEvents .header button {
+    font-size: 10px;
+    font-weight: bolder;
+  }
+  .myEvents .header #create-event-btn {
+    position: absolute;
+    right: 1.3em;
+    width: 20px;
+    height: 10px;
+  }
 }
 
 .participatingEvents {
@@ -35,8 +52,6 @@
   opacity: .9;
   -webkit-box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
           box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
-  -webkit-transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg);
-          transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg);
 }
 
 .participatingEvents .header {
