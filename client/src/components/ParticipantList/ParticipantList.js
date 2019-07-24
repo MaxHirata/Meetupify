@@ -25,6 +25,11 @@ const participantList = {
     "border": "2pt solid rgba(128, 128, 128, 0.692)",
     "background-color": "rgb(226, 220, 182)"
 }
+
+const list_group_itemHeading_override = {
+    "padding": "0",
+    "margin": "0"
+}
 /**--------------------------- */
 
 class ParticipantList extends Component {
@@ -53,7 +58,7 @@ class ParticipantList extends Component {
 
             <ListGroup>
                 <ListGroupItem style={participantList}>
-                    <ListGroupItemHeading><h4>Participants</h4></ListGroupItemHeading>
+                    <ListGroupItemHeading style={list_group_itemHeading_override}><span id="title">Participants</span></ListGroupItemHeading>
                 </ListGroupItem>
 
                 <InputGroup>

@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACb,gBAAgB,EAAE,OAAkB;CACvC",
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACb,gBAAgB,EAAE,OAAkB;CAKvC;;AAND,AAGI,gBAHY,CAGZ,MAAM,CAAC;EACH,SAAS,EAAE,GAAG;CACjB",
     "sources": [
         "participantList.scss"
     ],

@@ -76,7 +76,7 @@ class EventCreator extends Component {
                     </Col>
                     <Col lg={6} md={6} sm={12}>
                         <div className="eventDateHeader">
-                            <h4>Event Date: <span>MM/DD/YYYY</span></h4>
+                            <h4>Event Date: <span className="eventDate">MM/DD/YYYY</span></h4>
                         </div>
                     </Col>
                 </Row>
@@ -86,9 +86,7 @@ class EventCreator extends Component {
                     </Col>
                     {this.props.eventState ? voteVenueDisplay : finalEventDisplay}
                     {/* {voteVenueDisplay} */}
-
                 </Row>
-
             </Container>
         );
     }

@@ -1,22 +1,48 @@
 
 .eventCreator {
-    background-color: rgba(60, 83, 128, 0.623);
+    background-color: rgba(60, 83, 128, 0.9);
     border-radius: 1em;
     padding-bottom: 1em;
 
     .currentEventHeader{
         background-color: cornflowerblue;
-        border-radius: 0.5em;
+        //border-radius: 0.5em;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
         margin: 0 -15px;
+
+
     }
 
     .deadlineHeader{
-        background-color: crimson;
+        background-color: #e9ecef;
         border-radius: 2em;
+
+        .deadlineDate {
+            color: crimson;
+        }
     }
 
     .eventDateHeader{
-        background-color: aquamarine;
+        background-color: #e9ecef;
         border-radius: 2em;
+
+        .eventDate {
+            color: rgb(7, 197, 55);
+            
+        }
+    }
+
+    .venueList{
+        margin-bottom: 0px;
+        width: 100%;
+        //position: relative;
+        //padding: 20px 10px;
+        padding: 0 0 0 0;
+        border-radius: 1em;
+        // border-top-left-radius: 0;
+        // border-top-right-radius: 0; 
+        opacity: .9;
+        //box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
     }
 }

@@ -44,7 +44,6 @@ const eventItem = (props) => {
 
     return (
         <Card className="eventCard" style={cardBorder}>
-
             <CardBody>
                 <CardTitle>
                     <h2>{props.eventName}</h2>
