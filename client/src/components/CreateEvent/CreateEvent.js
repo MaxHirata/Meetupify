@@ -147,9 +147,9 @@ class createEvent extends Component {
                             </FormGroup>
                         </Form>
 
-                        <p>Event Name: {this.state.eventName}</p>
+                        {/* <p>Event Name: {this.state.eventName}</p>
                         <p>Event Date: {this.state.eventDate}</p>
-                        <p>Event Deadline: {this.state.eventDeadline}</p>
+                        <p>Event Deadline: {this.state.eventDeadline}</p> */}
 
                     </ModalBody>
                     <ModalFooter>

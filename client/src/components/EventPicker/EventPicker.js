@@ -37,7 +37,7 @@ class EventPicker extends Component {
         console.log("Current Event ID: " + current_event)
         if (current_event) {
             //this.props.onGetVenues(current_event);
-            this.props.loadSelectedEvent(current_event)
+            this.props.loadSelectedEvent(current_event);
         }
     };
 

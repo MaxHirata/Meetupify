@@ -1,0 +1,59 @@
+.addVenueDisplay {
+  background-Color: rgba(60, 83, 128, 0.897);
+  border-radius: .7em;
+  padding: 1em;
+}
+
+.addVenueDisplay .locationInput {
+  background-color: cornflowerblue;
+  padding-top: 5px;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 3em;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bolder;
+  border: 2px #919191 solid;
+}
+
+.addVenueDisplay .termInput {
+  background-color: cornflowerblue;
+  padding-top: 5px;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 3em;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bolder;
+  border: 2px #919191 solid;
+}
+
+.addVenueDisplay .submitInput {
+  background-color: rgba(245, 26, 70, 0.781);
+  padding-top: 5px;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 3em;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bolder;
+  color: white;
+  border: 2px #919191 solid;
+}
+
+.addVenueDisplay .submitInput #submitButton {
+  -webkit-box-shadow: 0 0 #919191;
+          box-shadow: 0 0 #919191;
+  border-top: 2px #919191 solid;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addVenueDisplay .venueCards-display {
+  background-color: #e9ecef;
+  border-radius: .5em;
+  padding: 10px 5px 15px 5px;
+}
+
+.addVenueDisplay .venueCards-display .venueCards-submit {
+  border: 2px #919191 solid;
+  border-radius: .4em;
+}
+/*# sourceMappingURL=addNewVenue.css.map */

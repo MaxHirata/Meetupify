@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import { updateObject } from '../../shared/utilities';
 import { Redirect } from 'react-router-dom';
+import './addNewVenue.css';
 
 import {
     Container,
@@ -18,7 +19,7 @@ import {
     Row,
     Col,
     CardGroup,
-    Jumbotron,
+    Badge,
     InputGroupText,
 } from 'reactstrap';
 
@@ -85,87 +86,84 @@ class AddNewVenues extends Component {
 
         return (
             <Container>
+                <div className="addVenueDisplay">
+                    <Form>
+                        <Row form>
+                            <Col xl={5} lg={5} md={5} sm={12}>
+                                <FormGroup className="locationInput">
+                                    <Label for="location" >Location</Label>
+                                    <Input
+                                        type="text"
+                                        name="location"
+                                        id="venueLocation"
+                                        value={this.state.searchData.location}
+                                        onChange={(event) => this.onHandlerChangeLocation(event)}
+                                        placeholder="city, state" />
+                                </FormGroup>
+                            </Col>
+                            <Col xl={5} lg={5} md={5} sm={12}>
+                                <FormGroup className="termInput">
+                                    <Label for="term" >Terms</Label>
+                                    <Input
+                                        type="text"
+                                        name="term"
+                                        id="venueTerms"
+                                        value={this.state.searchData.term}
+                                        onChange={(event) => this.onHanderChangeTerm(event)}
+                                        placeholder="Coffee, Cocktails, Ramen" />
+                                </FormGroup>
+                            </Col>
+                            <Col xl={2} lg={2} md={2} sm={12} >
+                                <div className="submitInput">
+                                    <Label for="submitButton">Use Yelp</Label>
+                                    <InputGroup>
+                                        <Button id="submitButton" color='danger' onClick={() => this.onHandleSubmitSearch()} block>Search</Button>
 
-                <Form>
-                    <Row form>
-                        <Col xl={5} lg={5} md={5} sm={12}>
-                            <FormGroup>
-                                <Label for="location" >Location</Label>
-                                <Input
-                                    type="text"
-                                    name="location"
-                                    id="venueLocation"
-                                    value={this.state.searchData.location}
-                                    onChange={(event) => this.onHandlerChangeLocation(event)}
-                                    placeholder="city, state" />
-                            </FormGroup>
-                        </Col>
-                        <Col xl={5} lg={5} md={5} sm={12}>
-                            <FormGroup>
-                                <Label for="term" >Terms</Label>
-                                <Input
-                                    type="text"
-                                    name="term"
-                                    id="venueTerms"
-                                    value={this.state.searchData.term}
-                                    onChange={(event) => this.onHanderChangeTerm(event)}
-                                    placeholder="Coffee, Cocktails, Ramen" />
-                            </FormGroup>
-                        </Col>
-                        <Col xl={2} lg={2} md={2} sm={12} >
-                            <Label for="submitButton">Use Yelp</Label>
+
+                                    </InputGroup>
+                                    {/* <Input type="submit" color="danger" value="Submit" onClick={() => this.onHandleSubmitSearch()} /> */}
+                                </div>
+                            </Col>
+                        </Row>
+                    </Form>
+
+                    <div className="venueCards-display">
+
+                        <h2>Add Venues to Event: {this.props.eventName}</h2>
+                        <div className="venueCards-submit">
                             <InputGroup>
-                                <Button id="submitButton" color='secondary' onClick={() => this.onHandleSubmitSearch()} block>Submit</Button>
-
-
+                                <InputGroupAddon addonType="prepend">VenueName</InputGroupAddon>
+                                <Input name="selectedVenueName" onChange={onChange()} value={this.state.selectedVenueName} placeholder="Select A Venue Below...." />
+                                <InputGroupAddon addonType="append">
+                                    <Button color="danger" onClick={() => this.onHandlerAddVenue()}>Add to Event</Button>
+                                </InputGroupAddon>
                             </InputGroup>
-                            {/* <Input type="submit" color="danger" value="Submit" onClick={() => this.onHandleSubmitSearch()} /> */}
+                        </div>
+                        <Badge color="secondary" pill>Display Yelp venues to add to current event's venue list</Badge>
+                        <CardGroup>
+                            <Container>
+                                <Row key={uuid}>
+                                    {venues.map((venue) => (
+                                        <Col lg={3} md={4} sm={12} style={colStyle} key={uuid}>
+                                            <VenueItem
+                                                name={venue.name}
+                                                image={venue.image}
+                                                link={venue.link}
+                                                location={venue.location}
+                                                rating={venue.rating}
+                                                price={venue.price}
+                                                selectVenue={this.props.onSelectVenue}
+                                                key={uuid}
+                                                clicked={this.selectVenue}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Container>
+                        </CardGroup>
+                    </div>
+                </div>
 
-
-
-
-                        </Col>
-                    </Row>
-
-
-                </Form>
-
-
-
-                Display yelp events
-                submit button add to event venue list
-                <Jumbotron fluid>
-                    <h2>Add Venues to Event: {this.props.eventName}</h2>
-                    <InputGroup>
-                        <InputGroupAddon addonType="prepend">VenueName</InputGroupAddon>
-                        <Input name="selectedVenueName" onChange={onChange()} value={this.state.selectedVenueName} placeholder="Select A Venue Below...." />
-                        <InputGroupAddon addonType="append">
-                            <Button color="danger" onClick={() => this.onHandlerAddVenue()}>Add to Event</Button>
-                        </InputGroupAddon>
-                    </InputGroup>
-                    <CardGroup>
-                        <Container>
-                            <Row key={uuid}>
-                                {venues.map((venue) => (
-                                    <Col lg={3} md={4} sm={12} style={colStyle} key={uuid}>
-                                        <VenueItem
-                                            name={venue.name}
-                                            image={venue.image}
-                                            link={venue.link}
-                                            location={venue.location}
-                                            rating={venue.rating}
-                                            price={venue.price}
-                                            selectVenue={this.props.onSelectVenue}
-                                            key={uuid}
-                                            clicked={this.selectVenue}
-                                        />
-                                    </Col>
-
-                                ))}
-                            </Row>
-                        </Container>
-                    </CardGroup>
-                </Jumbotron>
 
             </Container>
         );
