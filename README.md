@@ -1,5 +1,6 @@
 # QHangout
 NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
+*Last Update:  7/25/2019
 
 CURRENTLY WORKING ON:
 - WORK ON FRONT-END:
@@ -55,4 +56,5 @@ Going to the Current Event Tab:
  - If the event is past the deadline, Participants can no longer vote. Participants are Presented with the Venue for Event. (STILL HAVE TO WORK ON THE FINAL EVENT COMPONENT.....)
  <img src="/readMeImages/EventBuilder.png" width="450">
  <img src="/readMeImages/FinalEvent.png" width="400">
+
 
