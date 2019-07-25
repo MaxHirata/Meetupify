@@ -15,16 +15,13 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/actions/auth';
 import './auth.css';
-import logo from '../../resources/logo.png';
+import logo from '../../resources/Q-Hangout-Logo.png';
 
 class LoginUser extends Component {
     state = {
-        email: 'testPerson2@gmail.com',
+        email: 'testPerson@gmail.com',
         password: 'test222'
     }
-
-
-
 
     render() {
 

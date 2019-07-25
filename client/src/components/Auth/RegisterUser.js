@@ -10,7 +10,7 @@ import {
 
 } from 'reactstrap';
 import './auth.css';
-import logo from '../../resources/logo.png';
+import logo from '../../resources/Q-Hangout-Logo.png';
 
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';

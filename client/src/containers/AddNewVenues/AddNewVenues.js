@@ -80,9 +80,9 @@ class AddNewVenues extends Component {
         }
         const venues = this.props.yelpVenues;
 
-        // if (!this.props.isAuthenticated) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         return (
             <Container>

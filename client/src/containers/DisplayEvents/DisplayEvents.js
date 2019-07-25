@@ -39,15 +39,15 @@ class DisplayEvents extends Component {
         // console.log("ParticipatingEvents")
         // console.log(participatingEvents)
 
-        // if (!this.props.isAuthenticated) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         let displayEvents = (
             <CardGroup>
                 <Row>
                     {events.map((event) => (
-                        <Col lg={3} md={4} sm={12} style={colStyle}>
+                        <Col lg={4} md={4} sm={12} style={colStyle}>
                             <EventItem
                                 key={uuid}
                                 event_id={event._id}
@@ -68,21 +68,22 @@ class DisplayEvents extends Component {
 
         let displayParticipantingEvents = (
             <CardGroup>
-                <Row>
-                    {participatingEvents.map((event) => (
-                        <Col lg={3} md={4} sm={12} style={colStyle}>
-                            <EventItem
-                                key={uuid}
-                                event_id={event._id}
-                                eventName={event.eventName}
-                                status={event.active}
-                                deadlineTime={event.deadlineTime}
-                                selectEvent={this.props.setSelectedEvent} />
-                        </Col>
+                <Container>
+                    <Row>
+                        {participatingEvents.map((event) => (
+                            <Col lg={4} md={4} sm={12} style={colStyle}>
+                                <EventItem
+                                    key={uuid}
+                                    event_id={event._id}
+                                    eventName={event.eventName}
+                                    status={event.active}
+                                    deadlineTime={event.deadlineTime}
+                                    selectEvent={this.props.setSelectedEvent} />
+                            </Col>
 
-                    ))}
-                </Row>
-
+                        ))}
+                    </Row>
+                </Container>
             </CardGroup>
         );
 

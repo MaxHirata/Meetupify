@@ -20,12 +20,11 @@ import './eventCreator.css';
 
 class EventCreator extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         const event_id = this.props.currentEventId;
         if (event_id) {
             this.props.loadCurrentEvent(event_id);
         }
-
         //this.onSetFinalEventHandler();
     }
 
@@ -41,9 +40,9 @@ class EventCreator extends Component {
 
     render() {
 
-        // if (!this.props.isAuthenticated) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
 
         let voteVenueDisplay = (
             <Col lg={9} md={9} sm={12}>
