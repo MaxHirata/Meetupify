@@ -54,5 +54,5 @@ Going to the Current Event Tab:
  - select Venues to and click on Vote to send a Vote Request that will decide where the Participants' Event will be held. (Note: Each Participant is only allowed to vote 3 times max)
  - If the event is past the deadline, Participants can no longer vote. Participants are Presented with the Venue for Event. (STILL HAVE TO WORK ON THE FINAL EVENT COMPONENT.....)
  <img src="/readMeImages/EventBuilder.png" width="450">
- <img src="/readMeImages/FinalEventProto.png" width="400">
+ <img src="/readMeImages/FinalEvent.png" width="400">
 
