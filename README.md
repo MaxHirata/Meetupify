@@ -1,4 +1,4 @@
-# QHangout
+# Meetupify
 NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
 <hr>
 *Last Update:  7/25/2019
