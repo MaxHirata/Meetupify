@@ -1,0 +1,49 @@
+@mixin inputBox($background-color) {
+    background-color: $background-color;
+    padding-top: 5px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 3em; 
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-weight: bolder;
+}
+
+.addVenueDisplay {
+    background-Color: rgba(60, 83, 128, 0.897);
+    border-radius: .7em;
+    padding: 1em;
+
+    .locationInput {
+        @include inputBox(cornflowerblue);
+        border: 2px rgb(145, 145, 145) solid;
+    }
+
+    .termInput{
+        @include inputBox(cornflowerblue);
+        border: 2px rgb(145, 145, 145) solid;
+    }
+
+    .submitInput{
+        @include inputBox(rgba(245, 26, 70, 0.781));
+        color: white;
+        border: 2px rgb(145, 145, 145) solid;
+
+        #submitButton { 
+            box-shadow: 0 0 rgb(145, 145, 145);
+            border-top: 2px rgb(145, 145, 145) solid;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    }
+
+    .venueCards-display{
+        background-color: #e9ecef;
+        border-radius: .5em;
+        padding: 10px 5px 15px 5px;
+
+        .venueCards-submit {
+            border: 2px rgb(145, 145, 145) solid;
+            border-radius: .4em;
+        }
+    }
+}

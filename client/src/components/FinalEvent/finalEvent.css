@@ -1,0 +1,25 @@
+.finalEvent {
+  background-color: #e9ecef;
+  border-radius: .5em;
+  padding: 2em;
+}
+
+.finalEvent .finalEvent-img {
+  border-radius: 1em;
+  border: 3px rgba(95, 95, 95, 0.918) solid;
+  width: 25em;
+  height: 25em;
+}
+
+@media screen and (max-width: 990px) {
+  .finalEvent .finalEvent-img {
+    width: 15em;
+    height: 15em;
+  }
+}
+
+.finalEvent .location {
+  font-weight: bold;
+  font-size: 18px;
+}
+/*# sourceMappingURL=finalEvent.css.map */

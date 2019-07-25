@@ -47,7 +47,7 @@ body{
   margin: auto;
 }
 
-.authForm {
+/* .authForm {
   padding-top: 20px;
 }
 
@@ -55,7 +55,7 @@ body{
   margin: auto;
   display: inline-block;
   text-align: center;
-}
+} */
 
 .row {
   margin-right: auto;

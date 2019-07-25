@@ -1,0 +1,18 @@
+.eventCard {
+  margin: 2px 2px 2px 2px;
+  border: 2pt solid rgba(128, 128, 128, 0.692);
+}
+
+.eventCard .statusPast {
+  color: crimson;
+}
+
+.eventCard .statusActive {
+  color: green;
+}
+
+.eventCard .deadline {
+  font-weight: bolder;
+  color: #ff6c6c;
+}
+/*# sourceMappingURL=eventItem.css.map */

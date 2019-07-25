@@ -9,10 +9,14 @@ import {
     Button
 
 } from 'reactstrap';
+import './auth.css';
+import logo from '../../resources/Q-Hangout-Logo.png';
+
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../store/actions/alerts';
 import { register } from '../../store/actions/auth';
+
 
 class RegisterUser extends Component {
     state = {
@@ -74,6 +78,7 @@ class RegisterUser extends Component {
         return (
             <Container>
                 <div className="authForm">
+                    <img src={logo} width="200px" />
                     <Form>
                         <Row>
                             <div className="authFormInput">

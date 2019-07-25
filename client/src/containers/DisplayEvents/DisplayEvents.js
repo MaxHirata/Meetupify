@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid';
 import CreateEvent from '../../components/CreateEvent/CreateEvent';
 import { Redirect } from 'react-router-dom';
+import './displayEvents.css';
 
 
 /* Inline Styles */
@@ -46,7 +47,7 @@ class DisplayEvents extends Component {
             <CardGroup>
                 <Row>
                     {events.map((event) => (
-                        <Col lg={3} md={4} sm={12} style={colStyle}>
+                        <Col lg={4} md={4} sm={12} style={colStyle}>
                             <EventItem
                                 key={uuid}
                                 event_id={event._id}
@@ -55,32 +56,36 @@ class DisplayEvents extends Component {
                                 deadlineTime={event.deadlineTime}
                                 selectEvent={this.props.setSelectedEvent} />
                         </Col>
-
                     ))}
                 </Row>
 
             </CardGroup>
         )
+
+        const displayNoEvents = (
+            <div className="noEvents">...</div>
+        );
 
         let displayParticipantingEvents = (
             <CardGroup>
-                <Row>
-                    {participatingEvents.map((event) => (
-                        <Col lg={3} md={4} sm={12} style={colStyle}>
-                            <EventItem
-                                key={uuid}
-                                event_id={event._id}
-                                eventName={event.eventName}
-                                status={event.active}
-                                deadlineTime={event.deadlineTime}
-                                selectEvent={this.props.setSelectedEvent} />
-                        </Col>
+                <Container>
+                    <Row>
+                        {participatingEvents.map((event) => (
+                            <Col lg={4} md={4} sm={12} style={colStyle}>
+                                <EventItem
+                                    key={uuid}
+                                    event_id={event._id}
+                                    eventName={event.eventName}
+                                    status={event.active}
+                                    deadlineTime={event.deadlineTime}
+                                    selectEvent={this.props.setSelectedEvent} />
+                            </Col>
 
-                    ))}
-                </Row>
-
+                        ))}
+                    </Row>
+                </Container>
             </CardGroup>
-        )
+        );
 
         return (
             <Container>
@@ -93,19 +98,25 @@ class DisplayEvents extends Component {
                     diplay ("Time to create an EVENT!!!!")
 
                 Create Event Button */}
-                <Jumbotron>
-                    <h2>My Events</h2>
-                    <hr className='my-2' />
-                    <CreateEvent />
-                    {events !== undefined ? displayEvents : null}
-                </Jumbotron>
 
-                <Jumbotron>
-                    <h2>Participating Events</h2>
-                    <hr className="my-2" />
-                    {participatingEvents !== undefined ? displayParticipantingEvents : null}
-                </Jumbotron>
-
+                <div className="myEvents">
+                    <div className="header">
+                        <h2>My Events
+                            <span id="create-event-btn">
+                                <CreateEvent />
+                            </span>
+                        </h2>
+                        <hr className='my-2' />
+                    </div>
+                    {events.length > 0 ? displayEvents : displayNoEvents}
+                </div>
+                <div className="participatingEvents">
+                    <div className="header">
+                        <h2>Participating Events</h2>
+                        <hr className="my-2" />
+                    </div>
+                    {participatingEvents.length > 0 ? displayParticipantingEvents : displayNoEvents}
+                </div>
             </Container>
         );
     }

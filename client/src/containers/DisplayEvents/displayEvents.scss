@@ -1,0 +1,73 @@
+$break-small: 575px;
+$break-medium: 1000px;
+
+
+.noEvents {
+    margin: 0;
+    padding: 0;
+    color: rgb(238, 238, 238);
+    text-shadow: 2px 2px rgb(133, 133, 133);
+    font-weight: bold;
+    font-size-adjust: 60px;
+    font-size: 2em;
+}
+
+.myEvents {
+    background-color: rgb(60, 83, 128);
+    margin-bottom: 0px;
+    //position: relative;
+    //padding: 20px 10px;
+    padding: 0 0 10px 0;
+    border-radius: 1em;
+    // border-top-left-radius: 0;
+    // border-top-right-radius: 0; 
+    opacity: .9;
+    box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
+    //transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg); 
+
+    .header {
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        padding-top: 10px;
+        background-color: cornflowerblue;
+
+        #create-event-btn {
+            position: absolute;
+            right: 1em;
+        }
+        @media screen and (max-width: $break-small){
+
+            button {
+                font-size: 10px;
+                font-weight: bolder;
+            }
+
+            #create-event-btn {
+                position: absolute;
+                right: 1.3em;
+                width: 20px;
+                height: 10px;
+            }
+        }
+
+    }
+}
+
+.participatingEvents {
+    background-color: rgb(153, 148, 116);
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-radius: 1em;
+    // border-bottom-left-radius: 0px;
+    // border-bottom-right-radius: 0pxs; 
+    opacity: .9;
+    box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.411);
+    // transform: rotateY(20deg) rotateX(5deg) rotateZ(0deg); 
+
+    .header {
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        padding-top: 10px;
+        background-color:  rgb(226, 220, 182);
+    }
+}

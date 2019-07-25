@@ -14,17 +14,17 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import './eventCreator.css';
 
 
 
 class EventCreator extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         const event_id = this.props.currentEventId;
         if (event_id) {
             this.props.loadCurrentEvent(event_id);
         }
-
         //this.onSetFinalEventHandler();
     }
 
@@ -46,7 +46,7 @@ class EventCreator extends Component {
 
         let voteVenueDisplay = (
             <Col lg={9} md={9} sm={12}>
-                <Button onClick={this.onSendVoteHandler}>Send Vote</Button>
+                {/* <Button onClick={this.onSendVoteHandler}>Send Vote</Button> */}
                 <EventPicker />
             </Col>
         );
@@ -58,23 +58,25 @@ class EventCreator extends Component {
         );
 
         return (
-            <Container>
+            <Container className="eventCreator">
                 <Row>
                     <Col>
-                        <div className="CurrentEventHeader">
-                            <h1><Badge color="info">Current Event: {this.props.currentEventName}</Badge></h1>
+                        <div className="currentEventHeader">
+                            <h1>{this.props.currentEventName}</h1>
                         </div>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} md={6} sm={12} >
-                        <h3><Badge color="light">Deadline:</Badge></h3>
-                        <DeadlineTime />
+                        <div className="deadlineHeader">
+                            <h4>Deadline:<span className="deadlineDate"> <DeadlineTime /> </span></h4>
+                        </div>
+
                     </Col>
                     <Col lg={6} md={6} sm={12}>
-
-                        <h3><Badge color="light">Event Date: MM/DD/YYYY</Badge></h3>
-
+                        <div className="eventDateHeader">
+                            <h4>Event Date: <span className="eventDate">MM/DD/YYYY</span></h4>
+                        </div>
                     </Col>
                 </Row>
                 <Row>
@@ -83,9 +85,7 @@ class EventCreator extends Component {
                     </Col>
                     {this.props.eventState ? voteVenueDisplay : finalEventDisplay}
                     {/* {voteVenueDisplay} */}
-
                 </Row>
-
             </Container>
         );
     }

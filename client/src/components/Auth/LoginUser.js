@@ -14,15 +14,14 @@ import {
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/actions/auth';
+import './auth.css';
+import logo from '../../resources/Q-Hangout-Logo.png';
 
 class LoginUser extends Component {
     state = {
-        email: '',
-        password: ''
+        email: 'testPerson@gmail.com',
+        password: 'test222'
     }
-
-
-
 
     render() {
 
@@ -48,6 +47,7 @@ class LoginUser extends Component {
         return (
             <Container>
                 <div className="authForm">
+                    <img src={logo} width="200px" />
                     <Form>
                         <Row md={6}>
                             <div className="authFormInput">
