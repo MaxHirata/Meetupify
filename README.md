@@ -1,4 +1,6 @@
 # Meetupify
+Link-> https://guarded-eyrie-23528.herokuapp.com/
+<hr>
 NOTE: STILL A WORK IN PROGRESS, EXPECIALLY IN THE FRONT-END
 <hr>
 *Last Update:  7/25/2019
