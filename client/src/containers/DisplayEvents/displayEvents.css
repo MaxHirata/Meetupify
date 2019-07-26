@@ -11,7 +11,6 @@
 .myEvents {
   background-color: #3c5380;
   margin-bottom: 0px;
-  position: relative;
   padding: 0 0 10px 0;
   border-radius: 1em;
   opacity: .9;
@@ -24,6 +23,7 @@
   border-top-right-radius: 1em;
   padding-top: 10px;
   background-color: cornflowerblue;
+  position: relative;
 }
 
 .myEvents .header #create-event-btn {
