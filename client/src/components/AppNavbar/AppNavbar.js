@@ -87,7 +87,7 @@ class AppNavbar extends Component {
 
         return (
             <Navbar color="dark" dark expand="sm" className="mb-4">
-                <NavbarBrand style={{ color: "rgb(204, 90, 204)", "font-weight": "bolder" }} className="app-name" href="/">Q-Hangout</NavbarBrand>
+                <NavbarBrand style={{ color: "rgb(149, 0, 254)", "font-weight": "bolder" }} className="app-name" href="/">Meetupify</NavbarBrand>
                 {this.props.isAuthenticated ? usernameBrand : null}
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>

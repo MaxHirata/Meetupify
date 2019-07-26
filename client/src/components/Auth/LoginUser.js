@@ -15,7 +15,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/actions/auth';
 import './auth.css';
-import logo from '../../resources/Q-Hangout-Logo.png';
+import logo from '../../resources/meetupify-logo.png';
 
 class LoginUser extends Component {
     state = {
